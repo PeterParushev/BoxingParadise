@@ -3,6 +3,8 @@ using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -30,6 +32,11 @@ namespace BoxingParadiseBackend.Services
         public void DeleteMatchById(int id)
         {
             m_MatchRepository.DeleteById(id);
+        }
+
+        public IList<MatchDto> GetMatches(int count, int skip)
+        {
+            return m_MatchRepository.GetMatches(count, skip).Select(x => Mapper.Map<MatchDto>(x)).ToList();
         }
     }
 }

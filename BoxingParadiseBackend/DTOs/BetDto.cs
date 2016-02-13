@@ -6,5 +6,6 @@
         public int UserDtoId;
         public int MatchDtoId;
         public int BoxerDtoId;
+        public bool Canceled;
     }
 }

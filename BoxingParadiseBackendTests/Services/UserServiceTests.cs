@@ -5,6 +5,7 @@ using BoxingParadiseBackend.Services;
 using BoxingParadiseBackend.Services.Interfaces;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace BoxingParadiseBackendTests.Services
 {
@@ -49,6 +50,19 @@ namespace BoxingParadiseBackendTests.Services
             m_UserService.DeleteUser(userId);
 
             m_UserRepositoryMock.Verify(x => x.DeleteUser(userId), Times.Once);
+        }
+
+        [Test]
+        public void GetUsersShouldCallRepository()
+        {
+            const int userId = 42;
+            m_UserRepositoryMock = new Mock<IUserRepository>();
+            m_UserRepositoryMock.Setup(x => x.GetUsers()).Returns(new List<User>());
+            m_UserService = new UserService(m_UserRepositoryMock.Object);
+
+            m_UserService.GetUsers();
+
+            m_UserRepositoryMock.Verify(x => x.GetUsers(), Times.Once);
         }
     }
 }

@@ -2,11 +2,11 @@
 {
     public class User
     {
-        public int Id;
-        public string Username;
-        public string Password;
-        public string FullName;
-        public double Rating;
-        public bool Deleted;
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string FullName { get; set; }
+        public double Rating { get; set; }
+        public bool Deleted { get; set; }
     }
 }

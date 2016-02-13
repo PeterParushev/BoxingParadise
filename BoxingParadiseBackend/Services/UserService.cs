@@ -3,6 +3,8 @@ using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -30,6 +32,11 @@ namespace BoxingParadiseBackend.Services
         public void DeleteUser(int userId)
         {
             m_UserRepository.DeleteUser(userId);
+        }
+
+        public IList<UserDto> GetUsers()
+        {
+            return m_UserRepository.GetUsers().Select(x => Mapper.Map<UserDto>(x)).ToList();
         }
     }
 }

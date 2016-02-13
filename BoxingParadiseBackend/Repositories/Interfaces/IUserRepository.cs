@@ -1,4 +1,5 @@
 ﻿using BoxingParadiseBackend.Models;
+using System.Collections.Generic;
 
 namespace BoxingParadiseBackend.Repositories.Interfaces
 {
@@ -9,5 +10,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
         void PersistUser(User user);
 
         void DeleteUser(int userId);
+
+        IList<User> GetUsers();
     }
 }

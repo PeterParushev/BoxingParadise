@@ -7,7 +7,7 @@ namespace BoxingParadiseBackend.Repositories
     public class BoxingParadiseContext : DbContext
     {
         public BoxingParadiseContext()
-            : base("boxingParadiseConnection")
+            : base("boxingParadise")
         { }
 
         public DbSet<Administrator> Administrators { get; set; }

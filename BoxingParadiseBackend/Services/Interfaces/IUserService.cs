@@ -1,4 +1,5 @@
 ﻿using BoxingParadiseBackend.DTOs;
+using System.Collections.Generic;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
@@ -9,5 +10,7 @@ namespace BoxingParadiseBackend.Services.Interfaces
         void SaveUser(UserDto user);
 
         void DeleteUser(int userId);
+
+        IList<UserDto> GetUsers();
     }
 }

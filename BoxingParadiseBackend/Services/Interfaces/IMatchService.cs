@@ -1,4 +1,5 @@
 ﻿using BoxingParadiseBackend.DTOs;
+using System.Collections.Generic;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
@@ -9,5 +10,7 @@ namespace BoxingParadiseBackend.Services.Interfaces
         void SaveMatch(MatchDto match);
 
         void DeleteMatchById(int id);
+
+        IList<MatchDto> GetMatches(int count, int skip);
     }
 }

@@ -4,6 +4,7 @@ using BoxingParadiseBackend.Services;
 using BoxingParadiseBackend.Services.Interfaces;
 using Moq;
 using NUnit.Framework;
+using System.Collections.Generic;
 using Match = BoxingParadiseBackend.Models.Match;
 
 namespace BoxingParadiseBackendTests.Services
@@ -49,6 +50,20 @@ namespace BoxingParadiseBackendTests.Services
             m_MatchService.DeleteMatchById(userId);
 
             m_MatchRepositoryMock.Verify(x => x.DeleteById(userId), Times.Once);
+        }
+
+        [Test]
+        public void GetMatchesShouldCallRepository()
+        {
+            const int count = 1;
+            const int skip = 42;
+            m_MatchRepositoryMock = new Mock<IMatchRepository>();
+            m_MatchRepositoryMock.Setup(x => x.GetMatches(count, skip)).Returns(new List<Match>());
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+
+            m_MatchService.GetMatches(count, skip);
+
+            m_MatchRepositoryMock.Verify(x => x.GetMatches(count, skip), Times.Once);
         }
     }
 }
