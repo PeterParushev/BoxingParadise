@@ -7,5 +7,6 @@
         public string Password;
         public string FullName;
         public double Rating;
+        public bool Deleted;
     }
 }

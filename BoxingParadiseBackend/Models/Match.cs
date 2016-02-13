@@ -10,5 +10,6 @@ namespace BoxingParadiseBackend.Models
         public DateTime Date;
         public string Description;
         public int WinnerId;
+        public bool Canceled;
     }
 }
