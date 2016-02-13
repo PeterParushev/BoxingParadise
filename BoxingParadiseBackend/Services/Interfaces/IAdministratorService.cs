@@ -2,5 +2,6 @@
 {
     public interface IAdministratorService
     {
+        bool IsProvidedAdministratorKeyValid(string key);
     }
 }

@@ -17,14 +17,14 @@ namespace BoxingParadiseBackendTests.Services
         [Test]
         public void GetByIdShouldCallRepository()
         {
-            const int USER_ID = 42;
+            const int userId = 42;
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
-            m_MatchRepositoryMock.Setup(x => x.GetById(USER_ID)).Returns(new Match());
+            m_MatchRepositoryMock.Setup(x => x.GetById(userId)).Returns(new Match());
             m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
 
-            m_MatchService.GetMatchById(USER_ID);
+            m_MatchService.GetMatchById(userId);
 
-            m_MatchRepositoryMock.Verify(x => x.GetById(USER_ID), Times.Once);
+            m_MatchRepositoryMock.Verify(x => x.GetById(userId), Times.Once);
         }
 
         [Test]
@@ -42,13 +42,13 @@ namespace BoxingParadiseBackendTests.Services
         [Test]
         public void DeleteUserShouldCallRepository()
         {
-            const int USER_ID = 42;
+            const int userId = 42;
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
             m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
 
-            m_MatchService.DeleteMatchById(USER_ID);
+            m_MatchService.DeleteMatchById(userId);
 
-            m_MatchRepositoryMock.Verify(x => x.DeleteById(USER_ID), Times.Once);
+            m_MatchRepositoryMock.Verify(x => x.DeleteById(userId), Times.Once);
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IAdministratorRepository
     {
-         
+        bool IsProvidedAdministratorKeyValid(string key);
     }
 }

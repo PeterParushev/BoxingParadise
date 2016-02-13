@@ -1,12 +1,20 @@
-﻿using BoxingParadiseBackend.Services.Interfaces;
+﻿using BoxingParadiseBackend.Repositories.Interfaces;
+using BoxingParadiseBackend.Services.Interfaces;
 
 namespace BoxingParadiseBackend.Services
 {
     public class AdministratorService : IAdministratorService
     {
-        public bool IsProvidedKeyValid()
+        private readonly IAdministratorRepository m_AdministratorRepository;
+
+        public AdministratorService(IAdministratorRepository administratorRepository)
         {
-            throw new System.NotImplementedException();
+            m_AdministratorRepository = administratorRepository;
+        }
+
+        public bool IsProvidedAdministratorKeyValid(string key)
+        {
+            return m_AdministratorRepository.IsProvidedAdministratorKeyValid(key);
         }
     }
 }
