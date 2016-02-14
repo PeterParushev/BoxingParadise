@@ -34,24 +34,31 @@
         {
             <tr>
                 <td>
-                    @match.BoxerDtoOneId
+                    @match.FirstBoxerDto.Name
                 </td>
                 <td>
-                    @match.BoxerDtoTwoId
+                    @match.SecondBoxerDto.Name
                 </td>
                 <td>
-                    @match.VenueDtoId
+                    @match.VenueDto.Id
                 </td>
                 <td>
-                    @match.Date
+                    @match.StartDate
                 </td>
                 <td>
                     @match.Description
                 </td>
                 <td>
-                    @match.WinnerId
+                    @{
+            if (match.WinnerDto != null)
+            {
+                @match.WinnerDto.Name;
+            }
+                    }
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+@Html.ActionLink("Create a new match", "Create");

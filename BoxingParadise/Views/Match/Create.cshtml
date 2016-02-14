@@ -1,0 +1,29 @@
+﻿@using System.Web.Mvc.Html
+@model BoxingParadiseBackend.DTOs.MatchDto
+
+@{
+    ViewBag.Title = "Create a new boxer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@Html.BeginForm()
+<form>
+    <fieldset>
+        <label>Boxer one:</label>
+        @Html.DropDownListFor(x => x.FirstBoxerDto, (IEnumerable<SelectListItem>)ViewBag.Boxers)
+
+        <label>Boxer two:</label>
+        @Html.DropDownListFor(x => x.SecondBoxerDto, (IEnumerable<SelectListItem>)ViewBag.Boxers)
+
+        <label>Venue:</label>
+        @Html.DropDownListFor(x => x.VenueDto, (IEnumerable<SelectListItem>)ViewBag.Venues)
+
+        <label>Description:</label>
+        @Html.TextAreaFor(x => x.Description)
+
+        <label>Start date:</label>
+        @Html.TextBoxFor(model => model.StartDate, new { type = "time" })
+
+        <input type="submit" />
+    </fieldset>
+</form>

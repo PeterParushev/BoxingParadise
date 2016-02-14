@@ -15,8 +15,6 @@ namespace BoxingParadiseBackend.Services
         public BoxerService(IBoxerRepository boxerRepository)
         {
             m_BoxerRepository = boxerRepository;
-            Mapper.CreateMap<BoxerDto, Boxer>();
-            Mapper.CreateMap<Boxer, BoxerDto>();
         }
 
         public IList<BoxerDto> GetBoxers()

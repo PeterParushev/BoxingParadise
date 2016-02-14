@@ -15,8 +15,6 @@ namespace BoxingParadiseBackend.Services
         public VenueService(IVenueRepository venueRepository)
         {
             m_VenueRepository = venueRepository;
-            Mapper.CreateMap<Venue, VenueDto>();
-            Mapper.CreateMap<VenueDto, Venue>();
         }
 
         public IList<VenueDto> GetVenues()

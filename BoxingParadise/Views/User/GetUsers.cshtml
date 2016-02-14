@@ -1,0 +1,33 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Users";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Upcoming boxing matches</h2>
+<table class=".table-striped .table-hover .table-bordered">
+    <thead>
+        <tr>
+            <td>
+                Full name of User
+            </td>
+            <td>
+                Rating
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in ViewBag.Users)
+        {
+            <tr>
+                <td>
+                    @user.FullName
+                </td>
+                <td>
+                    @user.Rating
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

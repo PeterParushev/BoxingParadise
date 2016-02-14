@@ -21,14 +21,19 @@ namespace BoxingParadiseBackend.Repositories
 
         public void DeleteById(int id)
         {
-            DatabaseContext context = new DatabaseContext();
+            DatabaseContext context = new DatabaseContext(); ;
             context.Matches.Remove(context.Matches.FirstOrDefault(x => x.Id == id));
             context.SaveChanges();
         }
 
         public IList<Match> GetMatches(int? count, int? skip)
         {
-            return new DatabaseContext().Matches.ToList();
+            return
+                new DatabaseContext().Matches.Include("BoxerOne")
+                    .Include("BoxerTwo")
+                    .Include("Venue")
+                    .Include("Winner")
+                    .ToList();
         }
     }
 }

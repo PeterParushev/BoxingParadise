@@ -13,7 +13,6 @@ namespace BoxingParadiseBackend.Services
         public LoginService(ILoginRepository loginRepository)
         {
             m_LoginRepository = loginRepository;
-            Mapper.CreateMap<UserDto, User>();
         }
 
         public string Login(UserDto user)

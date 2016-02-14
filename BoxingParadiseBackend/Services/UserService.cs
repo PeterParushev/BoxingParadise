@@ -15,8 +15,6 @@ namespace BoxingParadiseBackend.Services
         public UserService(IUserRepository userRepository)
         {
             m_UserRepository = userRepository;
-            Mapper.CreateMap<User, UserDto>();
-            Mapper.CreateMap<UserDto, User>();
         }
 
         public UserDto GetById(int id)

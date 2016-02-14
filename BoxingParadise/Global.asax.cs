@@ -1,4 +1,5 @@
-﻿using BoxingParadise.DependencyResolution;
+﻿using BoxingParadiseBackend;
+
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -20,6 +21,7 @@ namespace BoxingParadise
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AuthConfig.RegisterAuth();
+            AutoMapperBootstrapper.Initialise();
         }
     }
 }

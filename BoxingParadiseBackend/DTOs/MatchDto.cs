@@ -4,11 +4,11 @@ namespace BoxingParadiseBackend.DTOs
 {
     public class MatchDto
     {
-        public int BoxerDtoOneId { get; set; }
-        public int BoxerDtoTwoId { get; set; }
-        public int VenueDtoId { get; set; }
+        public BoxerDto FirstBoxerDto { get; set; }
+        public BoxerDto SecondBoxerDto { get; set; }
+        public VenueDto VenueDto { get; set; }
         public DateTime StartDate { get; set; }
         public string Description { get; set; }
-        public int WinnerId { get; set; }
+        public BoxerDto WinnerDto { get; set; }
     }
 }

@@ -55,7 +55,6 @@ namespace BoxingParadiseBackendTests.Services
         [Test]
         public void GetUsersShouldCallRepository()
         {
-            const int userId = 42;
             m_UserRepositoryMock = new Mock<IUserRepository>();
             m_UserRepositoryMock.Setup(x => x.GetUsers()).Returns(new List<User>());
             m_UserService = new UserService(m_UserRepositoryMock.Object);

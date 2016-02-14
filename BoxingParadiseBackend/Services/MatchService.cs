@@ -15,8 +15,6 @@ namespace BoxingParadiseBackend.Services
         public MatchService(IMatchRepository matchRepository)
         {
             m_MatchRepository = matchRepository;
-            Mapper.CreateMap<Match, MatchDto>();
-            Mapper.CreateMap<MatchDto, Match>();
         }
 
         public MatchDto GetMatchById(int id)

@@ -59,6 +59,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoMapperBootstrapper.cs" />
     <Compile Include="DTOs\BetDto.cs" />
     <Compile Include="DTOs\BoxerDto.cs" />
     <Compile Include="DTOs\LoginDto.cs" />

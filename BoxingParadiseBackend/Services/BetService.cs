@@ -15,8 +15,6 @@ namespace BoxingParadiseBackend.Services
         public BetService(IBetRepository betRepository)
         {
             m_BetRepository = betRepository;
-            Mapper.CreateMap<Bet, BetDto>();
-            Mapper.CreateMap<BetDto, Bet>();
         }
 
         public IList<BetDto> GetBetsByUserId(int userId)
