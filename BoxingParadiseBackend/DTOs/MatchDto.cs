@@ -7,7 +7,7 @@ namespace BoxingParadiseBackend.DTOs
         public int BoxerDtoOneId;
         public int BoxerDtoTwoId;
         public int VenueDtoId;
-        public DateTime Date;
+        public DateTime StartDate;
         public string Description;
         public int WinnerId;
     }

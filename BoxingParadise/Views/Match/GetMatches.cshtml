@@ -1,0 +1,54 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Upcoming boxing matches</h2>
+<table>
+    <thead>
+        <tr>
+            <td>
+                Name of first boxer
+            </td>
+            <td>
+                Name of second boxer
+            </td>
+            <td>
+                Name of venue
+            </td>
+            <td>
+                StartDate
+            </td>
+            <td>
+                Description
+            </td>
+            <td>
+                Winner
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @ViewBag.Matches.BoxerDtoOneId
+            </td>
+            <td>
+                @ViewBag.Matches.BoxerDtoTwoId
+            </td>
+            <td>
+                @ViewBag.Matches.VenueDtoId
+            </td>
+            <td>
+                @ViewBag.Matches.Date
+            </td>
+            <td>
+                @ViewBag.Matches.Description
+            </td>
+            <td>
+                @ViewBag.Matches.WinnerId
+            </td>
+        </tr>
+    </tbody>
+</table>
