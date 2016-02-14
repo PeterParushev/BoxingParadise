@@ -44,8 +44,8 @@ namespace BoxingParadise.DependencyResolution
             For<IMatchRepository>().Use<MatchRepository>();
             //For<IMatchRepository>().Use<MatchRepository>();
             //For<IBetRepository>().Use<BetRepository>();
-            //For<IBoxerRepository>().Use<BoxerRepository>();
-            //For<IVenueRepository>().Use<VenueRepository>();
+            For<IBoxerRepository>().Use<BoxerRepository>();
+            For<IVenueRepository>().Use<VenueRepository>();
             //For<IAdministratorRepository>().Use<AdministratorRepository>();
         }
     }

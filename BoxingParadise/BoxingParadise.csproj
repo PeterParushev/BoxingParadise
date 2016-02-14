@@ -198,9 +198,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\StructuremapMvc.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\BoxerController.cs" />
     <Compile Include="Controllers\MatchController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DependencyResolution\ControllerConvention.cs" />
     <Compile Include="DependencyResolution\DefaultRegistry.cs" />
     <Compile Include="DependencyResolution\IoC.cs" />
@@ -315,8 +317,12 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Web.config" />
-    <Content Include="Views\Match\Index.cshtml" />
-    <Content Include="Views\Match\GetMatches.cshtml" />
+    <Content Include="Views\Match\Match.cshtml" />
+    <Content Include="Views\Boxer\Get.cshtml" />
+    <Content Include="Views\Match\Post.cshtml" />
+    <Content Include="Views\Boxer\Create.cshtml" />
+    <Content Include="Views\Venue\Index.cshtml" />
+    <Content Include="Views\Venue\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

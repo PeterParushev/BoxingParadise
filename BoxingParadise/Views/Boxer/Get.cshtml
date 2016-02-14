@@ -1,0 +1,35 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "Boxing Paradise's boxers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Boxers</h2>
+<table class=".table-striped .table-hover .table-bordered">
+    <thead>
+        <tr>
+            <td>
+                Id
+            </td>
+            <td>
+                Name
+            </td>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var match in ViewBag.Boxers)
+    {
+        <tr>
+            <td>
+                @match.Id
+            </td>
+            <td>
+                @match.Name
+            </td>
+        </tr>
+    }
+    </tbody>
+
+    @Html.ActionLink("Create a new boxer", "Create");
+</table>

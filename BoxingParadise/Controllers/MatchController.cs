@@ -1,11 +1,12 @@
-﻿using BoxingParadiseBackend.Services.Interfaces;
+﻿using BoxingParadiseBackend.DTOs;
+using BoxingParadiseBackend.Services.Interfaces;
 using System.Web.Mvc;
 
 namespace BoxingParadise.Controllers
 {
     public class MatchController : Controller
     {
-        private IMatchService m_MatchService;
+        private readonly IMatchService m_MatchService;
 
         public MatchController(IMatchService matchService)
         {
@@ -13,17 +14,20 @@ namespace BoxingParadise.Controllers
         }
 
         //
-        // GET: /Matches/
+        // GET: /Match/
         [HttpGet]
-        public ActionResult GetMatches(int? take, int? skip)
+        public ActionResult Match(int? take, int? skip)
         {
             ViewBag.Matches = m_MatchService.GetMatches(take, skip);
 
             return View();
         }
 
-        public ActionResult Index()
+        [HttpPut]
+        public ActionResult Post(MatchDto match)
         {
+            m_MatchService.SaveMatch(match);
+            ViewBag.Matches = m_MatchService.GetMatches();
             return View();
         }
     }

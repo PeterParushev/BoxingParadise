@@ -34,7 +34,7 @@ namespace BoxingParadiseBackend.Services
             m_MatchRepository.DeleteById(id);
         }
 
-        public IList<MatchDto> GetMatches(int? count, int? skip)
+        public IList<MatchDto> GetMatches(int? count = 10, int? skip = 0)
         {
             return m_MatchRepository.GetMatches(count, skip).Select(x => Mapper.Map<MatchDto>(x)).ToList();
         }

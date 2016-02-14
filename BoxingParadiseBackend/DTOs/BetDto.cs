@@ -2,10 +2,10 @@
 {
     public class BetDto
     {
-        public int Id;
-        public int UserDtoId;
-        public int MatchDtoId;
-        public int BoxerDtoId;
-        public bool Canceled;
+        public int Id { get; set; }
+        public int UserDtoId { get; set; }
+        public int MatchDtoId { get; set; }
+        public int BoxerDtoId { get; set; }
+        public bool Canceled { get; set; }
     }
 }

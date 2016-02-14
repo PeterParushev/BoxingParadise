@@ -1,0 +1,16 @@
+﻿@model BoxingParadiseBackend.DTOs.BoxerDto
+@{
+    ViewBag.Title = "Create a new boxer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create a new boxer</h2>
+@using (Html.BeginForm())
+{
+    <form>
+        <fieldset>
+            @Html.EditorFor(boxerDto => boxerDto.Name)
+            <input type="submit" value="Create" />
+        </fieldset>
+    </form>
+}

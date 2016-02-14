@@ -1,0 +1,17 @@
+﻿@model BoxingParadiseBackend.DTOs.VenueDto
+
+@{
+    ViewBag.Title = "Create a venue";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create a venue</h2>
+
+@Html.BeginForm()
+<form>
+    <fieldset>
+        @Html.EditorFor(x => x.Name)
+        @Html.EditorFor(x => x.Description)
+        <input type="submit" title="Create a venue" />
+    </fieldset>
+</form>
