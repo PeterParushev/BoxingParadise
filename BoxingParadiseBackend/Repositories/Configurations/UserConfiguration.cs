@@ -10,11 +10,11 @@ namespace BoxingParadiseBackend.Repositories.Configurations
         {
             ToTable("tUser");
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(x => x.Deleted);
-            Property(x => x.FullName).HasMaxLength(50);
-            Property(x => x.Password).HasMaxLength(50);
+            Property(x => x.Deleted).IsRequired();
+            Property(x => x.FullName).HasMaxLength(50).IsRequired();
+            Property(x => x.Password).HasMaxLength(50).IsRequired();
             Property(x => x.Rating);
-            Property(x => x.Username).HasMaxLength(50);
+            Property(x => x.Username).HasMaxLength(50).IsRequired();
         }
     }
 }

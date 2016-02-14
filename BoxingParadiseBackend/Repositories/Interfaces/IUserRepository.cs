@@ -9,7 +9,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
 
         void PersistUser(User user);
 
-        void DeleteUser(int userId);
+        void DeleteUser(int id);
 
         IList<User> GetUsers();
     }

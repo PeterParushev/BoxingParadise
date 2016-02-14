@@ -10,7 +10,7 @@ namespace BoxingParadiseBackend.Repositories.Configurations
         {
             ToTable("tVenue");
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(x => x.Name).HasMaxLength(50);
+            Property(x => x.Name).HasMaxLength(50).IsRequired();
             Property(x => x.Description).HasMaxLength(1000);
         }
     }

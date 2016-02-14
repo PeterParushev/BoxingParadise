@@ -4,6 +4,7 @@ namespace BoxingParadiseBackend.Models
 {
     public class Match
     {
+        public int Id { get; set; }
         public int BoxerOneId { get; set; }
         public int BoxerTwoId { get; set; }
         public int VenueId { get; set; }
