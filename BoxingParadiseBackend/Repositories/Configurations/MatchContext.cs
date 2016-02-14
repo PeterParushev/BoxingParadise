@@ -10,11 +10,11 @@ namespace BoxingParadiseBackend.Repositories.Configurations
         {
             ToTable("tMatch");
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
-            Property(x => x.BoxerOneId).HasColumnName("Fk_tBoxer_BoxerOneId").IsRequired();
-            Property(x => x.BoxerTwoId).HasColumnName("Fk_tBoxer_BoxerTwoId").IsRequired();
+            HasRequired(x => x.BoxerOne);
+            HasRequired(x => x.BoxerTwo);
             Property(x => x.StartDate).IsRequired();
-            Property(x => x.VenueId).HasColumnName("Fk_tVenue_VenueId").IsRequired();
-            Property(x => x.WinnerId).HasColumnName("Fk_tBoxer_WinnerId");
+            HasRequired(x => x.Venue);
+            HasOptional(x => x.Winner);
             Property(x => x.Canceled);
             Property(x => x.Description).HasMaxLength(1000);
         }

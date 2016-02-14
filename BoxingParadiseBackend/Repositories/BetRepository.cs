@@ -34,7 +34,7 @@ namespace BoxingParadiseBackend.Repositories
         public void CancelAllBetsForAMatch(int matchId)
         {
             DatabaseContext context = new DatabaseContext();
-            context.Bets.Where(x => x.MatchId == matchId).ToList().ForEach(x => x.Canceled = true);
+            context.Bets.Where(x => x.Match.Id == matchId).ToList().ForEach(x => x.Canceled = true);
             context.SaveChanges();
         }
     }

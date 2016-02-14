@@ -99,6 +99,10 @@
     <Compile Include="Repositories\Migrations\201602141549118_UpdateModels.Designer.cs">
       <DependentUpon>201602141549118_UpdateModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Migrations\201602141911466_CreateForeignKeys.cs" />
+    <Compile Include="Repositories\Migrations\201602141911466_CreateForeignKeys.Designer.cs">
+      <DependentUpon>201602141911466_CreateForeignKeys.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Migrations\Configuration.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\VenueRepository.cs" />
@@ -130,6 +134,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositories\Migrations\201602141549118_UpdateModels.resx">
       <DependentUpon>201602141549118_UpdateModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201602141911466_CreateForeignKeys.resx">
+      <DependentUpon>201602141911466_CreateForeignKeys.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
