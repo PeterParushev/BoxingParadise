@@ -9,19 +9,19 @@ namespace BoxingParadiseBackend.Repositories
     {
         public IList<Boxer> GetBoxers()
         {
-            return new BoxingParadiseContext().Boxers.ToList();
+            return new DatabaseContext().Boxers.ToList();
         }
 
         public void Persist(Boxer boxer)
         {
-            BoxingParadiseContext context = new BoxingParadiseContext();
+            DatabaseContext context = new DatabaseContext();
             context.Boxers.Add(boxer);
             context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            BoxingParadiseContext context = new BoxingParadiseContext();
+            DatabaseContext context = new DatabaseContext();
             context.Boxers.Remove(context.Boxers.FirstOrDefault(x => x.Id == id));
             context.SaveChanges();
         }

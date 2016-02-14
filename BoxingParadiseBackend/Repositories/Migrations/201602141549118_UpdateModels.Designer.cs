@@ -7,13 +7,13 @@ namespace BoxingParadiseBackend.Repositories.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class CreateDatabase : IMigrationMetadata
+    public sealed partial class UpdateModels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(CreateDatabase));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(UpdateModels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201602141310200_createDatabase"; }
+            get { return "201602141549118_UpdateModels"; }
         }
         
         string IMigrationMetadata.Source

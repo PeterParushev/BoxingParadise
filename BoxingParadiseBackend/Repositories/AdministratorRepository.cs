@@ -7,7 +7,7 @@ namespace BoxingParadiseBackend.Repositories
     {
         public bool IsProvidedAdministratorKeyValid(string key)
         {
-            return new BoxingParadiseContext().Administrators.Any(x => x.AdminKey == key);
+            return new DatabaseContext().Administrators.Any(x => x.AdminKey == key);
         }
     }
 }

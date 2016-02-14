@@ -15,6 +15,8 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using BoxingParadiseBackend.Repositories;
+using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services;
 using BoxingParadiseBackend.Services.Interfaces;
 using StructureMap;
@@ -39,6 +41,12 @@ namespace BoxingParadise.DependencyResolution
             For<IVenueService>().Use<VenueService>();
             For<ILoginService>().Use<LoginService>();
             For<IAdministratorService>().Use<AdministratorService>();
+            For<IMatchRepository>().Use<MatchRepository>();
+            //For<IMatchRepository>().Use<MatchRepository>();
+            //For<IBetRepository>().Use<BetRepository>();
+            //For<IBoxerRepository>().Use<BoxerRepository>();
+            //For<IVenueRepository>().Use<VenueRepository>();
+            //For<IAdministratorRepository>().Use<AdministratorRepository>();
         }
     }
 }

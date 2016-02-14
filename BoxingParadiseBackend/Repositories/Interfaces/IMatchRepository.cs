@@ -11,6 +11,6 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
 
         void DeleteById(int id);
 
-        IList<Match> GetMatches(int count, int skip);
+        IList<Match> GetMatches(int? count, int? skip);
     }
 }

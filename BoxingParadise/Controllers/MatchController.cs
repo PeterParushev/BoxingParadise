@@ -15,7 +15,7 @@ namespace BoxingParadise.Controllers
         //
         // GET: /Matches/
         [HttpGet]
-        public ActionResult GetMatches(int take, int skip)
+        public ActionResult GetMatches(int? take, int? skip)
         {
             ViewBag.Matches = m_MatchService.GetMatches(take, skip);
 

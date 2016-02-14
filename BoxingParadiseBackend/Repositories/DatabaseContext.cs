@@ -4,9 +4,9 @@ using System.Data.Entity;
 
 namespace BoxingParadiseBackend.Repositories
 {
-    public class BoxingParadiseContext : DbContext
+    public class DatabaseContext : DbContext
     {
-        public BoxingParadiseContext()
+        public DatabaseContext()
             : base("BoxingParadise")
         { }
 
@@ -31,7 +31,7 @@ namespace BoxingParadiseBackend.Repositories
 
         public static void SetInitializer()
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<BoxingParadiseContext, Migrations.Configuration>());
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<DatabaseContext, Migrations.Configuration>());
         }
     }
 }

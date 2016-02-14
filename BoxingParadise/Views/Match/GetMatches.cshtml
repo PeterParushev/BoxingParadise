@@ -2,11 +2,11 @@
 
 @{
     ViewBag.Title = "title";
-    Layout = "_Layout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Upcoming boxing matches</h2>
-<table>
+<table class=".table-striped .table-hover .table-bordered">
     <thead>
         <tr>
             <td>
@@ -30,25 +30,28 @@
         </tr>
     </thead>
     <tbody>
-        <tr>
-            <td>
-                @ViewBag.Matches.BoxerDtoOneId
-            </td>
-            <td>
-                @ViewBag.Matches.BoxerDtoTwoId
-            </td>
-            <td>
-                @ViewBag.Matches.VenueDtoId
-            </td>
-            <td>
-                @ViewBag.Matches.Date
-            </td>
-            <td>
-                @ViewBag.Matches.Description
-            </td>
-            <td>
-                @ViewBag.Matches.WinnerId
-            </td>
-        </tr>
+        @foreach (var match in ViewBag.Matches)
+        {
+            <tr>
+                <td>
+                    @match.BoxerDtoOneId
+                </td>
+                <td>
+                    @match.BoxerDtoTwoId
+                </td>
+                <td>
+                    @match.VenueDtoId
+                </td>
+                <td>
+                    @match.Date
+                </td>
+                <td>
+                    @match.Description
+                </td>
+                <td>
+                    @match.WinnerId
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

@@ -9,19 +9,19 @@ namespace BoxingParadiseBackend.Repositories
     {
         public IList<Bet> GetBetsByUserId(int userId)
         {
-            return new BoxingParadiseContext().Bets.ToList();
+            return new DatabaseContext().Bets.ToList();
         }
 
         public void Persist(Bet bet)
         {
-            BoxingParadiseContext context = new BoxingParadiseContext();
+            DatabaseContext context = new DatabaseContext();
             context.Bets.Add(bet);
             context.SaveChanges();
         }
 
         public void CancelBet(int betId)
         {
-            BoxingParadiseContext context = new BoxingParadiseContext();
+            DatabaseContext context = new DatabaseContext();
             var bet = context.Bets.FirstOrDefault(x => x.Id == betId);
             if (bet != null)
             {
@@ -33,7 +33,7 @@ namespace BoxingParadiseBackend.Repositories
 
         public void CancelAllBetsForAMatch(int matchId)
         {
-            BoxingParadiseContext context = new BoxingParadiseContext();
+            DatabaseContext context = new DatabaseContext();
             context.Bets.Where(x => x.MatchId == matchId).ToList().ForEach(x => x.Canceled = true);
             context.SaveChanges();
         }
