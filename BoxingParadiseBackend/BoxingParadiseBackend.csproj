@@ -65,6 +65,7 @@
     <Compile Include="DTOs\MatchDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="DTOs\VenueDto.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Administrator.cs" />
     <Compile Include="Models\Bet.cs" />
     <Compile Include="Models\Boxer.cs" />
