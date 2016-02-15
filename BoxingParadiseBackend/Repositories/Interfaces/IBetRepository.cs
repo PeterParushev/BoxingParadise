@@ -13,5 +13,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
         Task CancelBet(int betId);
 
         IList<Bet> GetAllBetsByMatchId(int matchId);
+
+        Task CancelAllBetsByMatchId(int matchId);
     }
 }

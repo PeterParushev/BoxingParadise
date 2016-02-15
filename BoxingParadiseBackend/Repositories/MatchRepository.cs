@@ -9,6 +9,13 @@ namespace BoxingParadiseBackend.Repositories
 {
     public class MatchRepository : IMatchRepository
     {
+        private readonly IBetRepository m_BetRepository;
+
+        public MatchRepository(IBetRepository betRepository)
+        {
+            m_BetRepository = betRepository;
+        }
+
         public async Task<Match> GetById(int id)
         {
             return await new DatabaseContext().Matches.FirstOrDefaultAsync(x => x.Id == id);
@@ -24,8 +31,15 @@ namespace BoxingParadiseBackend.Repositories
         public async Task DeleteById(int id)
         {
             DatabaseContext context = new DatabaseContext();
-            ;
-            context.Matches.Remove(context.Matches.FirstOrDefault(x => x.Id == id));
+
+            var match = context.Matches.FirstOrDefault(x => x.Id == id);
+            if (match != null)
+            {
+                match.Canceled = true;
+            }
+
+            await m_BetRepository.CancelAllBetsByMatchId(id);
+
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
