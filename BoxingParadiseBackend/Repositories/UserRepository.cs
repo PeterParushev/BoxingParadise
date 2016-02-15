@@ -38,5 +38,10 @@ namespace BoxingParadiseBackend.Repositories
                         .ToListAsync()
                         .ConfigureAwait(false);
         }
+
+        public async Task<User> GetUserByUsername(string username)
+        {
+            return await new DatabaseContext().Users.FirstOrDefaultAsync(x => x.Username == username);
+        }
     }
 }

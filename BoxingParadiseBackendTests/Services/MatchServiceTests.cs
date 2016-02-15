@@ -17,6 +17,7 @@ namespace BoxingParadiseBackendTests.Services
     public class MatchServiceTests
     {
         private Mock<IMatchRepository> m_MatchRepositoryMock;
+        private Mock<IUserService> m_UserServiceMock;
         private IMatchService m_MatchService;
 
         [OneTimeSetUp]
@@ -39,7 +40,8 @@ namespace BoxingParadiseBackendTests.Services
             const int userId = 42;
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
             m_MatchRepositoryMock.Setup(x => x.GetById(userId)).Returns(new Task<Match>(() => new Match()));
-            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+            m_UserServiceMock = new Mock<IUserService>();
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object, m_UserServiceMock.Object);
 
             m_MatchService.GetMatchById(userId);
 
@@ -51,7 +53,8 @@ namespace BoxingParadiseBackendTests.Services
         {
             MatchDto userDto = new MatchDto();
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
-            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+            m_UserServiceMock = new Mock<IUserService>();
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object, m_UserServiceMock.Object);
 
             await m_MatchService.SaveMatch(userDto);
 
@@ -63,7 +66,8 @@ namespace BoxingParadiseBackendTests.Services
         {
             const int userId = 42;
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
-            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+            m_UserServiceMock = new Mock<IUserService>();
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object, m_UserServiceMock.Object);
 
             m_MatchService.DeleteMatchById(userId);
 
@@ -77,7 +81,8 @@ namespace BoxingParadiseBackendTests.Services
             const int skip = 42;
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
             m_MatchRepositoryMock.Setup(x => x.GetMatches(count, skip)).Returns(new Task<IList<Match>>(() => new List<Match>()));
-            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+            m_UserServiceMock = new Mock<IUserService>();
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object, m_UserServiceMock.Object);
 
             m_MatchService.GetMatches(count, skip);
 
@@ -89,7 +94,8 @@ namespace BoxingParadiseBackendTests.Services
         {
             const int matchId = 1;
             m_MatchRepositoryMock = new Mock<IMatchRepository>();
-            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+            m_UserServiceMock = new Mock<IUserService>();
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object, m_UserServiceMock.Object);
 
             m_MatchService.Cancel(matchId);
 

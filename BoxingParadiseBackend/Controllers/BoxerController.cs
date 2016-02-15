@@ -27,13 +27,14 @@ namespace BoxingParadiseBackend.Controllers
         public async Task<HttpResponseMessage> Post(BoxerDto boxer)
         {
             await m_BoxerService.CreateBoxer(boxer);
-            return Request.CreateResponse(HttpStatusCode.Created, 1);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [HttpDelete]
-        public async Task Delete(int id)
+        public async Task<HttpResponseMessage> Delete(int id)
         {
             await m_BoxerService.DeleteBoxer(id);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
     }
 }

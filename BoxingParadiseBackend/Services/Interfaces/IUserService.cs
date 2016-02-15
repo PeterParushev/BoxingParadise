@@ -1,4 +1,5 @@
 ﻿using BoxingParadiseBackend.DTOs;
+using BoxingParadiseBackend.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -13,5 +14,9 @@ namespace BoxingParadiseBackend.Services.Interfaces
         Task DeleteUser(int userId);
 
         Task<IList<UserDto>> GetUser(int take, int skip);
+
+        Task<UserDto> GetUser(string username);
+
+        void UpdateUserRatings(Match match);
     }
 }

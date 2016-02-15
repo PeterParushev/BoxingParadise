@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using BoxingParadiseBackend.DTOs;
-using BoxingParadiseBackend.Models;
-using BoxingParadiseBackend.Repositories.Interfaces;
+﻿using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
@@ -26,27 +24,36 @@ namespace BoxingParadiseBackend.Controllers
         }
 
         [HttpPost]
-        public async Task Post(MatchDto match)
+        public async Task<HttpResponseMessage> Post(MatchDto match)
         {
             await m_MatchService.SaveMatch(match).ConfigureAwait(false);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [HttpDelete]
-        public async Task DeleteMatchById(int id)
+        public async Task<HttpResponseMessage> Delete(int id)
         {
             await m_MatchService.DeleteMatchById(id).ConfigureAwait(false);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpGet]
-        public async Task<IList<MatchDto>> GetMatches(int? count = 10, int? skip = 0)
+        public async Task<IList<MatchDto>> Get(int? count = 10, int? skip = 0)
         {
             return await m_MatchService.GetMatches(count, skip).ConfigureAwait(false);
         }
 
         [HttpPut]
-        public async Task Put(int matchId)
+        public async Task<HttpResponseMessage> Put(int matchId)
         {
             await m_MatchService.Cancel(matchId).ConfigureAwait(false);
+            return Request.CreateResponse(HttpStatusCode.OK);
+        }
+
+        [HttpGet]
+        public async Task<IList<MatchDto>> Get(string query, int? count = 10, int? skip = 0)
+        {
+            return await m_MatchService.GetMatches(count.Value, skip.Value, query);
         }
     }
 }

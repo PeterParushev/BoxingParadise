@@ -13,7 +13,7 @@ namespace BoxingParadiseBackend.Repositories
         {
             DatabaseContext context = new DatabaseContext();
 
-            if (context.Users.Any(x => x.Username == username && x.Password == password))
+            if (context.Users.Any(x => x.Username == username && x.Password == password && !x.Deleted))
             {
                 await context.Logins.Where(x => x.IsExpired).ForEachAsync(x => x.IsExpired = true);
                 context.Logins.Add(new Login() { ExpiryDate = DateTime.Now + new TimeSpan(1, 0, 0), IsExpired = false });

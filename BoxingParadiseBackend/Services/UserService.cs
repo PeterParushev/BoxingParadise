@@ -43,7 +43,12 @@ namespace BoxingParadiseBackend.Services
                 (await m_UserRepository.GetUsers(take, skip).ConfigureAwait(false)).Select(x => Mapper.Map<UserDto>(x)).ToList();
         }
 
-        internal void UpdateUserRatings(Match match)
+        public async Task<UserDto> GetUser(string username)
+        {
+            return Mapper.Map<UserDto>(await m_UserRepository.GetUserByUsername(username));
+        }
+
+        public void UpdateUserRatings(Match match)
         {
             IList<Bet> betsForThisMatch = m_BetRepository.GetAllBetsByMatchId(match.Id);
 

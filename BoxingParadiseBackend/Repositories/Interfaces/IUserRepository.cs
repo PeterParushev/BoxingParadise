@@ -13,5 +13,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
         Task DeleteUser(int id);
 
         Task<IList<User>> GetUsers(int take, int skip);
+
+        Task<User> GetUserByUsername(string username);
     }
 }

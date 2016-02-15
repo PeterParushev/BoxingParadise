@@ -28,14 +28,14 @@ namespace BoxingParadiseBackend.Controllers
         public async Task<HttpResponseMessage> Post(BetDto bet)
         {
             await m_BetService.CreateBet(bet).ConfigureAwait(false);
-            return Request.CreateResponse(HttpStatusCode.Created, bet);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [HttpDelete]
         public async Task<HttpResponseMessage> Delete(int betId)
         {
             await m_BetService.DeleteBet(betId).ConfigureAwait(false);
-            return Request.CreateResponse(HttpStatusCode.Created, betId);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
     }
 }

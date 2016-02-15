@@ -8,12 +8,14 @@ namespace BoxingParadiseBackend.Services.Interfaces
     {
         Task<MatchDto> GetMatchById(int id);
 
-        Task SaveMatch(MatchDto match);
+        Task SaveMatch(MatchDto matchDto);
 
         Task DeleteMatchById(int id);
 
-        Task<IList<MatchDto>> GetMatches(int? count, int? skip);
+        Task<IList<MatchDto>> GetMatches(int? take, int? skip);
 
         Task Cancel(int matchId);
+
+        Task<IList<MatchDto>> GetMatches(int? take, int? skip, string query);
     }
 }

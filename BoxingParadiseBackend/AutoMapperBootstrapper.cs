@@ -19,8 +19,15 @@ namespace BoxingParadiseBackend
 
         private static void ConfigureBetMapping()
         {
-            Mapper.CreateMap<Bet, BetDto>();
-            Mapper.CreateMap<BetDto, Bet>();
+            DatabaseContext context = new DatabaseContext();
+            Mapper.CreateMap<Bet, BetDto>().
+                ForMember(x => x.BoxerDto, x => x.MapFrom(y => y.Boxer)).
+                ForMember(x => x.MatchDto, x => x.MapFrom(y => y.Match))
+                .ForMember(x => x.UserDto, x => x.MapFrom(y => y.User));
+            Mapper.CreateMap<BetDto, Bet>().
+                ForMember(x => x.Boxer, x => x.MapFrom(y => context.Boxers.FirstOrDefault(z => z.Id == y.Id))).
+                ForMember(x => x.Match, x => x.MapFrom(y => context.Matches.FirstOrDefault(z => z.Id == y.Id))).
+                ForMember(x => x.User, x => x.MapFrom(y => context.Users.FirstOrDefault(z => z.Id == y.Id)));
         }
 
         private static void ConfigureBoxerMapping()
@@ -44,7 +51,8 @@ namespace BoxingParadiseBackend
 
         private static void ConfigureUserMapping()
         {
-            Mapper.CreateMap<User, UserDto>();
+            Mapper.CreateMap<User, UserDto>().
+                ForMember(x => x.Password, x => x.Ignore());
             Mapper.CreateMap<UserDto, User>();
         }
 
