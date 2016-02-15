@@ -1,16 +1,17 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface IBetService
     {
-        IList<BetDto> GetBetsByUserId(int userId);
+        Task<IList<BetDto>> GetBetsByUserId(int userId);
 
-        void PlaceBet(BetDto bet);
+        Task PlaceBet(BetDto bet);
 
-        void CancelBet(int betId);
+        Task CancelBet(int betId);
 
-        void CancelAllBetsForAMatch(int matchId);
+        Task CancelAllBetsForAMatch(int matchId);
     }
 }

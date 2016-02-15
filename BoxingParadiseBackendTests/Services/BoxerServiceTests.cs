@@ -1,4 +1,5 @@
-﻿using BoxingParadiseBackend.DTOs;
+﻿using AutoMapper;
+using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services;
@@ -6,6 +7,7 @@ using BoxingParadiseBackend.Services.Interfaces;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackendTests.Services
 {
@@ -15,11 +17,18 @@ namespace BoxingParadiseBackendTests.Services
         private Mock<IBoxerRepository> m_BoxerRepositoryMock;
         private IBoxerService m_BoxerService;
 
+        [OneTimeSetUp]
+        public void TestFixtureSetUp()
+        {
+            Mapper.CreateMap<BoxerDto, Boxer>();
+            Mapper.CreateMap<Boxer, BoxerDto>();
+        }
+
         [Test]
         public void GetBoxersShouldCallRepository()
         {
             m_BoxerRepositoryMock = new Mock<IBoxerRepository>();
-            m_BoxerRepositoryMock.Setup(x => x.GetBoxers()).Returns(new List<Boxer>());
+            m_BoxerRepositoryMock.Setup(x => x.GetBoxers()).Returns(new Task<IList<Boxer>>(() => new List<Boxer>()));
             m_BoxerService = new BoxerService(m_BoxerRepositoryMock.Object);
 
             m_BoxerService.GetBoxers();

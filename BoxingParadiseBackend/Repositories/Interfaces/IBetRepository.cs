@@ -1,16 +1,17 @@
 ﻿using BoxingParadiseBackend.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories.Interfaces
 {
     public interface IBetRepository
     {
-        IList<Bet> GetBetsByUserId(int userId);
+        Task<IList<Bet>> GetBetsByUserId(int userId);
 
-        void Persist(Bet bet);
+        Task Persist(Bet bet);
 
-        void CancelBet(int betId);
+        Task CancelBet(int betId);
 
-        void CancelAllBetsForAMatch(int matchId);
+        Task CancelAllBetsForAMatch(int matchId);
     }
 }

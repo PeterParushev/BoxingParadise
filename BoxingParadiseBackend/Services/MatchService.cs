@@ -5,6 +5,7 @@ using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -17,24 +18,26 @@ namespace BoxingParadiseBackend.Services
             m_MatchRepository = matchRepository;
         }
 
-        public MatchDto GetMatchById(int id)
+        public async Task<MatchDto> GetMatchById(int id)
         {
-            return Mapper.Map<MatchDto>(m_MatchRepository.GetById(id));
+            return Mapper.Map<MatchDto>(await m_MatchRepository.GetById(id));
         }
 
-        public void SaveMatch(MatchDto match)
+        public async Task SaveMatch(MatchDto match)
         {
-            m_MatchRepository.Persist(Mapper.Map<Match>(match));
+            await m_MatchRepository.Persist(Mapper.Map<Match>(match)).ConfigureAwait(false);
         }
 
-        public void DeleteMatchById(int id)
+        public async Task DeleteMatchById(int id)
         {
-            m_MatchRepository.DeleteById(id);
+            await m_MatchRepository.DeleteById(id).ConfigureAwait(false);
         }
 
-        public IList<MatchDto> GetMatches(int? count = 10, int? skip = 0)
+        public async Task<IList<MatchDto>> GetMatches(int? count = 10, int? skip = 0)
         {
-            return m_MatchRepository.GetMatches(count, skip).Select(x => Mapper.Map<MatchDto>(x)).ToList();
+            return
+                (await m_MatchRepository.GetMatches(count, skip).ConfigureAwait(false)).Select(
+                    x => Mapper.Map<MatchDto>(x)).ToList();
         }
     }
 }

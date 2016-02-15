@@ -1,16 +1,17 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface IUserService
     {
-        UserDto GetById(int id);
+        Task<UserDto> GetById(int id);
 
-        void SaveUser(UserDto user);
+        Task SaveUser(UserDto user);
 
-        void DeleteUser(int userId);
+        Task DeleteUser(int userId);
 
-        IList<UserDto> GetUsers();
+        Task<IList<UserDto>> GetUsers();
     }
 }

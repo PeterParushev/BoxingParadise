@@ -21,7 +21,7 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public ActionResult Match(int? take, int? skip)
         {
-            ViewBag.Matches = m_MatchService.GetMatches(take, skip);
+            ViewBag.Matches = m_MatchService.GetMatches(take, skip).Result;
 
             return View();
         }
@@ -29,8 +29,8 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Boxers = m_BoxerService.GetBoxers().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name });
-            ViewBag.Venues = m_VenueService.GetVenues().Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name });
+            ViewBag.Boxers = m_BoxerService.GetBoxers().Result.Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name });
+            ViewBag.Venues = m_VenueService.GetVenues().Result.Select(x => new SelectListItem() { Value = x.Id.ToString(), Text = x.Name });
             return View();
         }
 

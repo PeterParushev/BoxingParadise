@@ -1,34 +1,36 @@
 ﻿using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        public User GetById(int id)
+        public async Task<User> GetById(int id)
         {
-            return new DatabaseContext().Users.FirstOrDefault(x => x.Id == id);
+            return await new DatabaseContext().Users.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void PersistUser(User user)
+        public async Task PersistUser(User user)
         {
             DatabaseContext context = new DatabaseContext();
             context.Users.Add(user);
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public void DeleteUser(int id)
+        public async Task DeleteUser(int id)
         {
             DatabaseContext context = new DatabaseContext();
             context.Users.Remove(context.Users.FirstOrDefault(x => x.Id == id));
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public IList<User> GetUsers()
+        public async Task<IList<User>> GetUsers()
         {
-            return new DatabaseContext().Users.ToList();
+            return await new DatabaseContext().Users.ToListAsync().ConfigureAwait(false);
         }
     }
 }

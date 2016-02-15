@@ -5,6 +5,7 @@ using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -17,19 +18,21 @@ namespace BoxingParadiseBackend.Services
             m_BoxerRepository = boxerRepository;
         }
 
-        public IList<BoxerDto> GetBoxers()
+        public async Task<IList<BoxerDto>> GetBoxers()
         {
-            return m_BoxerRepository.GetBoxers().Select(x => Mapper.Map<BoxerDto>(x)).ToList();
+            return
+                (await m_BoxerRepository.GetBoxers().ConfigureAwait(false)).Select(x => Mapper.Map<BoxerDto>(x))
+                    .ToList();
         }
 
-        public void CreateBoxer(BoxerDto boxer)
+        public Task CreateBoxer(BoxerDto boxer)
         {
-            m_BoxerRepository.Persist(Mapper.Map<Boxer>(boxer));
+            return m_BoxerRepository.Persist(Mapper.Map<Boxer>(boxer));
         }
 
-        public void DeleteBoxer(int id)
+        public Task DeleteBoxer(int id)
         {
-            m_BoxerRepository.Delete(id);
+            return m_BoxerRepository.Delete(id);
         }
     }
 }

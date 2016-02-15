@@ -1,29 +1,31 @@
 ﻿using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories
 {
     public class VenueRepository : IVenueRepository
     {
-        public IList<Venue> GetVenues()
+        public async Task<IList<Venue>> GetVenues()
         {
-            return new DatabaseContext().Venues.ToList();
+            return await new DatabaseContext().Venues.ToListAsync().ConfigureAwait(false);
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
             DatabaseContext context = new DatabaseContext();
             context.Venues.Remove(context.Venues.FirstOrDefault(x => x.Id == id));
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public void Persist(Venue venue)
+        public async Task Persist(Venue venue)
         {
             DatabaseContext context = new DatabaseContext();
             context.Venues.Add(venue);
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
     }
 }

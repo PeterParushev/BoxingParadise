@@ -1,16 +1,17 @@
 ﻿using BoxingParadiseBackend.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories.Interfaces
 {
     public interface IMatchRepository
     {
-        Match GetById(int id);
+        Task<Match> GetById(int id);
 
-        void Persist(Match match);
+        Task Persist(Match match);
 
-        void DeleteById(int id);
+        Task DeleteById(int id);
 
-        IList<Match> GetMatches(int? count, int? skip);
+        Task<IList<Match>> GetMatches(int? count, int? skip);
     }
 }

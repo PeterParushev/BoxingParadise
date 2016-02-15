@@ -16,7 +16,7 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public ActionResult Get()
         {
-            ViewBag.Boxers = m_BoxerService.GetBoxers();
+            ViewBag.Boxers = m_BoxerService.GetBoxers().Result;
             return View();
         }
 
@@ -30,7 +30,7 @@ namespace BoxingParadise.Controllers
         public ActionResult Create(BoxerDto boxer)
         {
             m_BoxerService.CreateBoxer(boxer);
-            ViewBag.Boxers = m_BoxerService.GetBoxers();
+            ViewBag.Boxers = m_BoxerService.GetBoxers().Result;
             return View("Get");
         }
     }

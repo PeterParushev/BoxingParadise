@@ -5,6 +5,7 @@ using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -17,24 +18,25 @@ namespace BoxingParadiseBackend.Services
             m_UserRepository = userRepository;
         }
 
-        public UserDto GetById(int id)
+        public async Task<UserDto> GetById(int id)
         {
-            return Mapper.Map<UserDto>(m_UserRepository.GetById(id));
+            return Mapper.Map<UserDto>(await m_UserRepository.GetById(id).ConfigureAwait(false));
         }
 
-        public void SaveUser(UserDto user)
+        public async Task SaveUser(UserDto user)
         {
-            m_UserRepository.PersistUser(Mapper.Map<User>(user));
+            await m_UserRepository.PersistUser(Mapper.Map<User>(user)).ConfigureAwait(false);
         }
 
-        public void DeleteUser(int userId)
+        public async Task DeleteUser(int userId)
         {
-            m_UserRepository.DeleteUser(userId);
+            await m_UserRepository.DeleteUser(userId).ConfigureAwait(false);
         }
 
-        public IList<UserDto> GetUsers()
+        public async Task<IList<UserDto>> GetUsers()
         {
-            return m_UserRepository.GetUsers().Select(x => Mapper.Map<UserDto>(x)).ToList();
+            return
+                (await m_UserRepository.GetUsers().ConfigureAwait(false)).Select(x => Mapper.Map<UserDto>(x)).ToList();
         }
     }
 }

@@ -1,14 +1,15 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface IVenueService
     {
-        IList<VenueDto> GetVenues();
+        Task<IList<VenueDto>> GetVenues();
 
-        void DeleteVenue(int venueId);
+        Task DeleteVenue(int venueId);
 
-        void CreateVenue(VenueDto venueDto);
+        Task CreateVenue(VenueDto venueDto);
     }
 }

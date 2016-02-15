@@ -1,14 +1,15 @@
 ﻿using BoxingParadiseBackend.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories.Interfaces
 {
     public interface IVenueRepository
     {
-        IList<Venue> GetVenues();
+        Task<IList<Venue>> GetVenues();
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        void Persist(Venue venue);
+        Task Persist(Venue venue);
     }
 }

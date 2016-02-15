@@ -5,6 +5,7 @@ using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -17,19 +18,21 @@ namespace BoxingParadiseBackend.Services
             m_VenueRepository = venueRepository;
         }
 
-        public IList<VenueDto> GetVenues()
+        public async Task<IList<VenueDto>> GetVenues()
         {
-            return m_VenueRepository.GetVenues().Select(x => Mapper.Map<VenueDto>(x)).ToList();
+            return
+                (await m_VenueRepository.GetVenues().ConfigureAwait(false)).Select(x => Mapper.Map<VenueDto>(x))
+                    .ToList();
         }
 
-        public void DeleteVenue(int venueId)
+        public async Task DeleteVenue(int venueId)
         {
-            m_VenueRepository.Delete(venueId);
+            await m_VenueRepository.Delete(venueId).ConfigureAwait(false);
         }
 
-        public void CreateVenue(VenueDto venueDto)
+        public async Task CreateVenue(VenueDto venueDto)
         {
-            m_VenueRepository.Persist(Mapper.Map<Venue>(venueDto));
+            await m_VenueRepository.Persist(Mapper.Map<Venue>(venueDto)).ConfigureAwait(false);
         }
     }
 }

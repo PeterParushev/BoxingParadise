@@ -1,16 +1,17 @@
 ﻿using BoxingParadiseBackend.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories.Interfaces
 {
     public interface IUserRepository
     {
-        User GetById(int id);
+        Task<User> GetById(int id);
 
-        void PersistUser(User user);
+        Task PersistUser(User user);
 
-        void DeleteUser(int id);
+        Task DeleteUser(int id);
 
-        IList<User> GetUsers();
+        Task<IList<User>> GetUsers();
     }
 }

@@ -1,14 +1,15 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface IBoxerService
     {
-        IList<BoxerDto> GetBoxers();
+        Task<IList<BoxerDto>> GetBoxers();
 
-        void CreateBoxer(BoxerDto boxer);
+        Task CreateBoxer(BoxerDto boxer);
 
-        void DeleteBoxer(int id);
+        Task DeleteBoxer(int id);
     }
 }

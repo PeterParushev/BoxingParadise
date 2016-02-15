@@ -1,39 +1,42 @@
 ﻿using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories
 {
     public class MatchRepository : IMatchRepository
     {
-        public Match GetById(int id)
+        public async Task<Match> GetById(int id)
         {
-            return new DatabaseContext().Matches.FirstOrDefault(x => x.Id == id);
+            return await new DatabaseContext().Matches.FirstOrDefaultAsync(x => x.Id == id);
         }
 
-        public void Persist(Match match)
+        public async Task Persist(Match match)
         {
             DatabaseContext context = new DatabaseContext();
             context.Matches.Add(match);
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public void DeleteById(int id)
+        public async Task DeleteById(int id)
         {
-            DatabaseContext context = new DatabaseContext(); ;
+            DatabaseContext context = new DatabaseContext();
+            ;
             context.Matches.Remove(context.Matches.FirstOrDefault(x => x.Id == id));
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public IList<Match> GetMatches(int? count, int? skip)
+        public async Task<IList<Match>> GetMatches(int? count, int? skip)
         {
-            return
+            return await
                 new DatabaseContext().Matches.Include("BoxerOne")
                     .Include("BoxerTwo")
                     .Include("Venue")
                     .Include("Winner")
-                    .ToList();
+                    .ToListAsync().ConfigureAwait(false);
         }
     }
 }

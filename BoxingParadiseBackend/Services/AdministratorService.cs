@@ -1,5 +1,6 @@
 ﻿using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -12,9 +13,9 @@ namespace BoxingParadiseBackend.Services
             m_AdministratorRepository = administratorRepository;
         }
 
-        public bool IsProvidedAdministratorKeyValid(string key)
+        public async Task<bool> IsProvidedAdministratorKeyValid(string key)
         {
-            return m_AdministratorRepository.IsProvidedAdministratorKeyValid(key);
+            return await m_AdministratorRepository.IsProvidedAdministratorKeyValid(key).ConfigureAwait(false);
         }
     }
 }

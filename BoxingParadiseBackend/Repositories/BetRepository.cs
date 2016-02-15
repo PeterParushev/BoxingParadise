@@ -1,25 +1,27 @@
 ﻿using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories
 {
     public class BetRepository : IBetRepository
     {
-        public IList<Bet> GetBetsByUserId(int userId)
+        public async Task<IList<Bet>> GetBetsByUserId(int userId)
         {
-            return new DatabaseContext().Bets.ToList();
+            return await new DatabaseContext().Bets.ToListAsync();
         }
 
-        public void Persist(Bet bet)
+        public async Task Persist(Bet bet)
         {
             DatabaseContext context = new DatabaseContext();
             context.Bets.Add(bet);
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public void CancelBet(int betId)
+        public async Task CancelBet(int betId)
         {
             DatabaseContext context = new DatabaseContext();
             var bet = context.Bets.FirstOrDefault(x => x.Id == betId);
@@ -28,14 +30,14 @@ namespace BoxingParadiseBackend.Repositories
                 bet.Canceled = true;
             }
 
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public void CancelAllBetsForAMatch(int matchId)
+        public async Task CancelAllBetsForAMatch(int matchId)
         {
             DatabaseContext context = new DatabaseContext();
             context.Bets.Where(x => x.Match.Id == matchId).ToList().ForEach(x => x.Canceled = true);
-            context.SaveChanges();
+            await context.SaveChangesAsync().ConfigureAwait(false);
         }
     }
 }

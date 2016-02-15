@@ -1,7 +1,9 @@
-﻿namespace BoxingParadiseBackend.Repositories.Interfaces
+﻿using System.Threading.Tasks;
+
+namespace BoxingParadiseBackend.Repositories.Interfaces
 {
     public interface IAdministratorRepository
     {
-        bool IsProvidedAdministratorKeyValid(string key);
+        Task<bool> IsProvidedAdministratorKeyValid(string key);
     }
 }

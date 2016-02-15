@@ -1,16 +1,17 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface IMatchService
     {
-        MatchDto GetMatchById(int id);
+        Task<MatchDto> GetMatchById(int id);
 
-        void SaveMatch(MatchDto match);
+        Task SaveMatch(MatchDto match);
 
-        void DeleteMatchById(int id);
+        Task DeleteMatchById(int id);
 
-        IList<MatchDto> GetMatches(int? count = 10, int? skip = 0);
+        Task<IList<MatchDto>> GetMatches(int? count = 10, int? skip = 0);
     }
 }

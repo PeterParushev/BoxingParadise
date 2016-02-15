@@ -1,6 +1,6 @@
-﻿using System.Web.Mvc;
-using BoxingParadiseBackend.DTOs;
+﻿using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Services.Interfaces;
+using System.Web.Mvc;
 
 namespace BoxingParadise.Controllers
 {
@@ -16,7 +16,7 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.Venues = m_VenueService.GetVenues();
+            ViewBag.Venues = m_VenueService.GetVenues().Result;
             return View();
         }
 
@@ -29,7 +29,7 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            ViewBag.Venues = m_VenueService.GetVenues();
+            ViewBag.Venues = m_VenueService.GetVenues().Result;
             return View("Create");
         }
 
@@ -37,7 +37,7 @@ namespace BoxingParadise.Controllers
         public ActionResult Create(VenueDto venue)
         {
             m_VenueService.CreateVenue(venue);
-            ViewBag.Venues = m_VenueService.GetVenues();
+            ViewBag.Venues = m_VenueService.GetVenues().Result;
             return View("Index");
         }
     }

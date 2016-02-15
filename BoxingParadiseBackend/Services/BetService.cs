@@ -5,6 +5,7 @@ using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -17,24 +18,26 @@ namespace BoxingParadiseBackend.Services
             m_BetRepository = betRepository;
         }
 
-        public IList<BetDto> GetBetsByUserId(int userId)
+        public async Task<IList<BetDto>> GetBetsByUserId(int userId)
         {
-            return m_BetRepository.GetBetsByUserId(userId).Select(bet => Mapper.Map<BetDto>(bet)).ToList();
+            return
+                (await m_BetRepository.GetBetsByUserId(userId).ConfigureAwait(false)).Select(
+                    bet => Mapper.Map<BetDto>(bet)).ToList();
         }
 
-        public void PlaceBet(BetDto bet)
+        public async Task PlaceBet(BetDto bet)
         {
-            m_BetRepository.Persist(Mapper.Map<Bet>(bet));
+            await m_BetRepository.Persist(Mapper.Map<Bet>(bet)).ConfigureAwait(false);
         }
 
-        public void CancelBet(int betId)
+        public async Task CancelBet(int betId)
         {
-            m_BetRepository.CancelBet(betId);
+            await m_BetRepository.CancelBet(betId).ConfigureAwait(false);
         }
 
-        public void CancelAllBetsForAMatch(int matchId)
+        public async Task CancelAllBetsForAMatch(int matchId)
         {
-            m_BetRepository.CancelAllBetsForAMatch(matchId);
+            await m_BetRepository.CancelAllBetsForAMatch(matchId).ConfigureAwait(false);
         }
     }
 }
