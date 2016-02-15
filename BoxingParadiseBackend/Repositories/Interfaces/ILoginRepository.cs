@@ -1,9 +1,10 @@
 ﻿using BoxingParadiseBackend.Models;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Repositories.Interfaces
 {
     public interface ILoginRepository
     {
-        string Login(User user);
+        Task<Login> Login(string username, string password);
     }
 }

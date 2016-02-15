@@ -32,7 +32,7 @@ namespace BoxingParadiseBackendTests.Services
             m_UserRepositoryMock.Setup(x => x.GetById(userId)).Returns(new Task<User>(() => new User()));
             m_UserService = new UserService(m_UserRepositoryMock.Object);
 
-            m_UserService.GetById(userId);
+            m_UserService.GetUser(userId);
 
             m_UserRepositoryMock.Verify(x => x.GetById(userId), Times.Once);
         }
@@ -44,7 +44,7 @@ namespace BoxingParadiseBackendTests.Services
             m_UserRepositoryMock = new Mock<IUserRepository>();
             m_UserService = new UserService(m_UserRepositoryMock.Object);
 
-            m_UserService.SaveUser(userDto);
+            m_UserService.CreateUser(userDto);
 
             m_UserRepositoryMock.Verify(x => x.PersistUser(It.IsAny<User>()), Times.Once);
         }
@@ -68,7 +68,7 @@ namespace BoxingParadiseBackendTests.Services
             m_UserRepositoryMock.Setup(x => x.GetUsers()).Returns(new Task<IList<User>>(() => new List<User>()));
             m_UserService = new UserService(m_UserRepositoryMock.Object);
 
-            m_UserService.GetUsers();
+            m_UserService.GetUser();
 
             m_UserRepositoryMock.Verify(x => x.GetUsers(), Times.Once);
         }

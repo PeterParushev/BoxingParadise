@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using BoxingParadiseBackend.DTOs;
-using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services;
@@ -83,6 +82,18 @@ namespace BoxingParadiseBackendTests.Services
             m_MatchService.GetMatches(count, skip);
 
             m_MatchRepositoryMock.Verify(x => x.GetMatches(count, skip), Times.Once);
+        }
+
+        [Test]
+        public void CancelAllBetsForAMatchShouldCallRepository()
+        {
+            const int matchId = 1;
+            m_MatchRepositoryMock = new Mock<IMatchRepository>();
+            m_MatchService = new MatchService(m_MatchRepositoryMock.Object);
+
+            m_MatchService.Cancel(matchId);
+
+            m_MatchRepositoryMock.Verify(x => x.Cancel(matchId), Times.Once);
         }
     }
 }

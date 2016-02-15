@@ -8,10 +8,8 @@ namespace BoxingParadiseBackend.Services.Interfaces
     {
         Task<IList<BetDto>> GetBetsByUserId(int userId);
 
-        Task PlaceBet(BetDto bet);
+        Task CreateBet(BetDto bet);
 
-        Task CancelBet(int betId);
-
-        Task CancelAllBetsForAMatch(int matchId);
+        Task DeleteBet(int betId);
     }
 }

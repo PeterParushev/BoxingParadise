@@ -11,7 +11,7 @@ namespace BoxingParadiseBackend.Repositories
     {
         public async Task<IList<Bet>> GetBetsByUserId(int userId)
         {
-            return await new DatabaseContext().Bets.ToListAsync();
+            return await new DatabaseContext().Bets.Where(x => !x.Canceled).ToListAsync();
         }
 
         public async Task Persist(Bet bet)
@@ -30,13 +30,6 @@ namespace BoxingParadiseBackend.Repositories
                 bet.Canceled = true;
             }
 
-            await context.SaveChangesAsync().ConfigureAwait(false);
-        }
-
-        public async Task CancelAllBetsForAMatch(int matchId)
-        {
-            DatabaseContext context = new DatabaseContext();
-            context.Bets.Where(x => x.Match.Id == matchId).ToList().ForEach(x => x.Canceled = true);
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
     }

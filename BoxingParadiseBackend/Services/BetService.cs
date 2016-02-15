@@ -25,19 +25,14 @@ namespace BoxingParadiseBackend.Services
                     bet => Mapper.Map<BetDto>(bet)).ToList();
         }
 
-        public async Task PlaceBet(BetDto bet)
+        public async Task CreateBet(BetDto bet)
         {
             await m_BetRepository.Persist(Mapper.Map<Bet>(bet)).ConfigureAwait(false);
         }
 
-        public async Task CancelBet(int betId)
+        public async Task DeleteBet(int betId)
         {
             await m_BetRepository.CancelBet(betId).ConfigureAwait(false);
-        }
-
-        public async Task CancelAllBetsForAMatch(int matchId)
-        {
-            await m_BetRepository.CancelAllBetsForAMatch(matchId).ConfigureAwait(false);
         }
     }
 }

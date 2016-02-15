@@ -1,9 +1,9 @@
-﻿using BoxingParadiseBackend.DTOs;
+﻿using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface ILoginService
     {
-        string Login(UserDto user);
+        Task<Login> Login(string username, string password);
     }
 }

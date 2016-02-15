@@ -1,23 +1,22 @@
-﻿using AutoMapper;
-using BoxingParadiseBackend.DTOs;
-using BoxingParadiseBackend.Models;
+﻿using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services
 {
     public class LoginService : ILoginService
     {
-        private ILoginRepository m_LoginRepository;
+        private readonly ILoginRepository m_LoginRepository;
 
         public LoginService(ILoginRepository loginRepository)
         {
             m_LoginRepository = loginRepository;
         }
 
-        public string Login(UserDto user)
+        public async Task<Login> Login(string username, string password)
         {
-            return m_LoginRepository.Login(Mapper.Map<User>(user));
+            return await m_LoginRepository.Login(username, password);
         }
     }
 }

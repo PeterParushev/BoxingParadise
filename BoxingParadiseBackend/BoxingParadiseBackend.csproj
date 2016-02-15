@@ -56,10 +56,18 @@
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperBootstrapper.cs" />
+    <Compile Include="Controllers\BetController.cs" />
+    <Compile Include="Controllers\BoxerController.cs" />
+    <Compile Include="Controllers\MatchController .cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DTOs\BetDto.cs" />
     <Compile Include="DTOs\BoxerDto.cs" />
     <Compile Include="DTOs\LoginDto.cs" />
@@ -69,6 +77,8 @@
     <Compile Include="Repositories\AdministratorRepository.cs" />
     <Compile Include="Repositories\BetRepository.cs" />
     <Compile Include="Repositories\BoxerRepository.cs" />
+    <Compile Include="Repositories\Configurations\LoginConfiguration.cs" />
+    <Compile Include="Repositories\LoginRepository.cs" />
     <Compile Include="Repositories\MatchRepository.cs" />
     <Compile Include="Repositories\Migrations\201602141310200_createDatabase.cs" />
     <Compile Include="Repositories\Migrations\201602141310200_createDatabase.Designer.cs">

@@ -16,6 +16,7 @@ namespace BoxingParadiseBackend.Repositories
         public DbSet<Match> Matches { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Venue> Venues { get; set; }
+        public DbSet<Login> Logins { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -27,6 +28,7 @@ namespace BoxingParadiseBackend.Repositories
             modelBuilder.Configurations.Add(new MatchContext());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new VenueConfiguration());
+            modelBuilder.Configurations.Add(new LoginConfiguration());
         }
 
         public static void SetInitializer()

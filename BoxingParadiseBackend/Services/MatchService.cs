@@ -6,6 +6,7 @@ using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -38,6 +39,12 @@ namespace BoxingParadiseBackend.Services
             return
                 (await m_MatchRepository.GetMatches(count, skip).ConfigureAwait(false)).Select(
                     x => Mapper.Map<MatchDto>(x)).ToList();
+        }
+
+        [HttpPost]
+        public async Task Cancel(int matchId)
+        {
+            await m_MatchRepository.Cancel(matchId).ConfigureAwait(false);
         }
     }
 }

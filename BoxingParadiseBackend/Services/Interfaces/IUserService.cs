@@ -6,12 +6,12 @@ namespace BoxingParadiseBackend.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<UserDto> GetById(int id);
+        Task<UserDto> GetUser(int id);
 
-        Task SaveUser(UserDto user);
+        Task CreateUser(UserDto user);
 
         Task DeleteUser(int userId);
 
-        Task<IList<UserDto>> GetUsers();
+        Task<IList<UserDto>> GetUser();
     }
 }

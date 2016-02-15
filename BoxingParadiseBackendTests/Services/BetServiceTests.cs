@@ -38,25 +38,13 @@ namespace BoxingParadiseBackendTests.Services
         }
 
         [Test]
-        public void CancelAllBetsForAMatchShouldCallRepository()
-        {
-            const int matchId = 1;
-            m_BetRepositoryMock = new Mock<IBetRepository>();
-            m_BetService = new BetService(m_BetRepositoryMock.Object);
-
-            m_BetService.CancelAllBetsForAMatch(matchId);
-
-            m_BetRepositoryMock.Verify(x => x.CancelAllBetsForAMatch(matchId), Times.Once);
-        }
-
-        [Test]
         public async Task PlaceBetShouldCallRepository()
         {
             BetDto bet = new BetDto();
             m_BetRepositoryMock = new Mock<IBetRepository>();
             m_BetService = new BetService(m_BetRepositoryMock.Object);
 
-            await m_BetService.PlaceBet(bet);
+            await m_BetService.CreateBet(bet);
 
             m_BetRepositoryMock.Verify(x => x.Persist(It.IsAny<Bet>()), Times.Once);
         }
@@ -68,7 +56,7 @@ namespace BoxingParadiseBackendTests.Services
             m_BetRepositoryMock = new Mock<IBetRepository>();
             m_BetService = new BetService(m_BetRepositoryMock.Object);
 
-            m_BetService.CancelBet(betId);
+            m_BetService.DeleteBet(betId);
 
             m_BetRepositoryMock.Verify(x => x.CancelBet(betId), Times.Once);
         }

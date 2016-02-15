@@ -13,5 +13,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
         Task DeleteById(int id);
 
         Task<IList<Match>> GetMatches(int? count, int? skip);
+
+        Task Cancel(int matchId);
     }
 }

@@ -38,5 +38,12 @@ namespace BoxingParadiseBackend.Repositories
                     .Include("Winner")
                     .ToListAsync().ConfigureAwait(false);
         }
+
+        public async Task Cancel(int matchId)
+        {
+            DatabaseContext context = new DatabaseContext();
+            context.Bets.Where(x => x.Match.Id == matchId).ToList().ForEach(x => x.Canceled = true);
+            await context.SaveChangesAsync().ConfigureAwait(false);
+        }
     }
 }
