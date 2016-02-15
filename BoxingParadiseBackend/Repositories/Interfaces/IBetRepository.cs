@@ -11,5 +11,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
         Task Persist(Bet bet);
 
         Task CancelBet(int betId);
+
+        IList<Bet> GetAllBetsByMatchId(int matchId);
     }
 }

@@ -32,5 +32,10 @@ namespace BoxingParadiseBackend.Repositories
 
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
+
+        public IList<Bet> GetAllBetsByMatchId(int matchId)
+        {
+            return new DatabaseContext().Bets.Where(x => !x.Canceled && x.Match.Id == matchId).ToList();
+        }
     }
 }

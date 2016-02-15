@@ -15,6 +15,8 @@ namespace BoxingParadiseBackendTests.Services
     public class UserServiceTests
     {
         private Mock<IUserRepository> m_UserRepositoryMock;
+        private Mock<IBetRepository> m_BetRepositoryMock;
+        private Mock<IMatchRepository> m_MatchRepositoryMock;
         private IUserService m_UserService;
 
         [OneTimeSetUp]
@@ -29,8 +31,10 @@ namespace BoxingParadiseBackendTests.Services
         {
             const int userId = 42;
             m_UserRepositoryMock = new Mock<IUserRepository>();
+            m_BetRepositoryMock = new Mock<IBetRepository>();
             m_UserRepositoryMock.Setup(x => x.GetById(userId)).Returns(new Task<User>(() => new User()));
-            m_UserService = new UserService(m_UserRepositoryMock.Object);
+            m_MatchRepositoryMock = new Mock<IMatchRepository>();
+            m_UserService = new UserService(m_UserRepositoryMock.Object, m_BetRepositoryMock.Object, m_MatchRepositoryMock.Object);
 
             m_UserService.GetUser(userId);
 
@@ -42,7 +46,9 @@ namespace BoxingParadiseBackendTests.Services
         {
             UserDto userDto = new UserDto();
             m_UserRepositoryMock = new Mock<IUserRepository>();
-            m_UserService = new UserService(m_UserRepositoryMock.Object);
+            m_BetRepositoryMock = new Mock<IBetRepository>();
+            m_MatchRepositoryMock = new Mock<IMatchRepository>();
+            m_UserService = new UserService(m_UserRepositoryMock.Object, m_BetRepositoryMock.Object, m_MatchRepositoryMock.Object);
 
             m_UserService.CreateUser(userDto);
 
@@ -54,7 +60,9 @@ namespace BoxingParadiseBackendTests.Services
         {
             const int userId = 42;
             m_UserRepositoryMock = new Mock<IUserRepository>();
-            m_UserService = new UserService(m_UserRepositoryMock.Object);
+            m_BetRepositoryMock = new Mock<IBetRepository>();
+            m_MatchRepositoryMock = new Mock<IMatchRepository>();
+            m_UserService = new UserService(m_UserRepositoryMock.Object, m_BetRepositoryMock.Object, m_MatchRepositoryMock.Object);
 
             m_UserService.DeleteUser(userId);
 
@@ -65,12 +73,14 @@ namespace BoxingParadiseBackendTests.Services
         public void GetUsersShouldCallRepository()
         {
             m_UserRepositoryMock = new Mock<IUserRepository>();
-            m_UserRepositoryMock.Setup(x => x.GetUsers()).Returns(new Task<IList<User>>(() => new List<User>()));
-            m_UserService = new UserService(m_UserRepositoryMock.Object);
+            m_UserRepositoryMock.Setup(x => x.GetUsers(It.IsAny<int>(), It.IsAny<int>())).Returns(new Task<IList<User>>(() => new List<User>()));
+            m_BetRepositoryMock = new Mock<IBetRepository>();
+            m_MatchRepositoryMock = new Mock<IMatchRepository>();
+            m_UserService = new UserService(m_UserRepositoryMock.Object, m_BetRepositoryMock.Object, m_MatchRepositoryMock.Object);
 
-            m_UserService.GetUser();
+            m_UserService.GetUser(10, 10);
 
-            m_UserRepositoryMock.Verify(x => x.GetUsers(), Times.Once);
+            m_UserRepositoryMock.Verify(x => x.GetUsers(It.IsAny<int>(), It.IsAny<int>()), Times.Once);
         }
     }
 }

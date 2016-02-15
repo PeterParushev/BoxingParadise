@@ -32,7 +32,11 @@ namespace BoxingParadiseBackend.Repositories
         public async Task<IList<Match>> GetMatches(int? count, int? skip)
         {
             return await
-                new DatabaseContext().Matches.Include("BoxerOne")
+                new DatabaseContext().Matches.Where(x => !x.Canceled && x.Winner == null)
+                    .OrderByDescending(x => x.StartDate)
+                    .Take(count.Value)
+                    .Skip(skip.Value)
+                    .Include("BoxerOne")
                     .Include("BoxerTwo")
                     .Include("Venue")
                     .Include("Winner")

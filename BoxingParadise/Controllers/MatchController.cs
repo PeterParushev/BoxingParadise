@@ -38,7 +38,7 @@ namespace BoxingParadise.Controllers
         public ActionResult Create(MatchDto match)
         {
             m_MatchService.SaveMatch(match);
-            ViewBag.Matches = m_MatchService.GetMatches();
+            ViewBag.Matches = m_MatchService.GetMatches(10, 0);
             return View("Match");
         }
     }

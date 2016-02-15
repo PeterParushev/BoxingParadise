@@ -6,7 +6,6 @@ using BoxingParadiseBackend.Services.Interfaces;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web.Http;
 
 namespace BoxingParadiseBackend.Services
 {
@@ -34,14 +33,13 @@ namespace BoxingParadiseBackend.Services
             await m_MatchRepository.DeleteById(id).ConfigureAwait(false);
         }
 
-        public async Task<IList<MatchDto>> GetMatches(int? count = 10, int? skip = 0)
+        public async Task<IList<MatchDto>> GetMatches(int? count, int? skip)
         {
             return
                 (await m_MatchRepository.GetMatches(count, skip).ConfigureAwait(false)).Select(
                     x => Mapper.Map<MatchDto>(x)).ToList();
         }
 
-        [HttpPost]
         public async Task Cancel(int matchId)
         {
             await m_MatchRepository.Cancel(matchId).ConfigureAwait(false);

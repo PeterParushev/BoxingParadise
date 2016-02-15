@@ -12,6 +12,6 @@ namespace BoxingParadiseBackend.Services.Interfaces
 
         Task DeleteUser(int userId);
 
-        Task<IList<UserDto>> GetUser();
+        Task<IList<UserDto>> GetUser(int take, int skip);
     }
 }

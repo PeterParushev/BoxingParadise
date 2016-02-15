@@ -12,7 +12,7 @@ namespace BoxingParadiseBackend.Services.Interfaces
 
         Task DeleteMatchById(int id);
 
-        Task<IList<MatchDto>> GetMatches(int? count = 10, int? skip = 0);
+        Task<IList<MatchDto>> GetMatches(int? count, int? skip);
 
         Task Cancel(int matchId);
     }

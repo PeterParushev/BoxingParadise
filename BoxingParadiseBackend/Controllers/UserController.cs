@@ -34,9 +34,9 @@ namespace BoxingParadiseBackend.Controllers
         }
 
         [HttpGet]
-        public async Task<IList<UserDto>> Get()
+        public async Task<IList<UserDto>> Get(int take, int skip)
         {
-            return await m_UserSevice.GetUser().ConfigureAwait(false);
+            return await m_UserSevice.GetUser(take, skip).ConfigureAwait(false);
         }
     }
 }

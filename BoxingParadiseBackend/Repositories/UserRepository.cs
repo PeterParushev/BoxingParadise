@@ -28,9 +28,15 @@ namespace BoxingParadiseBackend.Repositories
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<User>> GetUsers()
+        public async Task<IList<User>> GetUsers(int take, int skip)
         {
-            return await new DatabaseContext().Users.ToListAsync().ConfigureAwait(false);
+            return
+                await
+                    new DatabaseContext().Users.Where(x => !x.Deleted).OrderBy(x => x.Rating)
+                        .Take(take)
+                        .Skip(skip)
+                        .ToListAsync()
+                        .ConfigureAwait(false);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using BoxingParadiseBackend.Models;
+using System.Threading.Tasks;
 
 namespace BoxingParadiseBackend.Services.Interfaces
 {
