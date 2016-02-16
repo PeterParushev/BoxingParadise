@@ -1,10 +1,14 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Services.Interfaces;
-using System.Web.Mvc;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace BoxingParadise.Controllers
 {
-    public class VenueController : Controller
+    public class VenueController : ApiController
     {
         private readonly IVenueService m_VenueService;
 
@@ -14,31 +18,23 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public async Task<IList<VenueDto>> Get()
         {
-            ViewBag.Venues = m_VenueService.GetVenues().Result;
-            return View();
+            return await m_VenueService.GetVenues();
         }
 
-        [HttpGet]
-        public ActionResult Venue()
+        [HttpDelete]
+        public async Task<HttpResponseMessage> Delete(int venueId)
         {
-            return Index();
-        }
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            ViewBag.Venues = m_VenueService.GetVenues().Result;
-            return View("Create");
+            await m_VenueService.DeleteVenue(venueId).ConfigureAwait(false);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpPost]
-        public ActionResult Create(VenueDto venue)
+        public async Task<HttpResponseMessage> Post(VenueDto venueDto)
         {
-            m_VenueService.CreateVenue(venue);
-            ViewBag.Venues = m_VenueService.GetVenues().Result;
-            return View("Index");
+            await m_VenueService.CreateVenue(venueDto);
+            return Request.CreateResponse(HttpStatusCode.Created);
         }
     }
 }

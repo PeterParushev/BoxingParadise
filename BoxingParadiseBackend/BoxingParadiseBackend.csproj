@@ -38,6 +38,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -48,11 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperBootstrapper.cs" />
-    <Compile Include="Controllers\BetController.cs" />
-    <Compile Include="Controllers\BoxerController.cs" />
-    <Compile Include="Controllers\MatchController .cs" />
-    <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\VenueController.cs" />
     <Compile Include="DTOs\BetDto.cs" />
     <Compile Include="DTOs\BoxerDto.cs" />
     <Compile Include="DTOs\LoginDto.cs" />
@@ -99,6 +98,10 @@
     <Compile Include="Repositories\Migrations\201602141911466_CreateForeignKeys.Designer.cs">
       <DependentUpon>201602141911466_CreateForeignKeys.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Migrations\201602162124378_AddLoginTable.cs" />
+    <Compile Include="Repositories\Migrations\201602162124378_AddLoginTable.Designer.cs">
+      <DependentUpon>201602162124378_AddLoginTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Migrations\Configuration.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\VenueRepository.cs" />
@@ -133,6 +136,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositories\Migrations\201602141911466_CreateForeignKeys.resx">
       <DependentUpon>201602141911466_CreateForeignKeys.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201602162124378_AddLoginTable.resx">
+      <DependentUpon>201602162124378_AddLoginTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

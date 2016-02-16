@@ -15,6 +15,7 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
+using BoxingParadise.Controllers;
 using BoxingParadiseBackend.Repositories;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services;

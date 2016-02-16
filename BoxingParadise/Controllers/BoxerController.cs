@@ -1,10 +1,14 @@
 ﻿using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Services.Interfaces;
-using System.Web.Mvc;
+using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace BoxingParadise.Controllers
 {
-    public class BoxerController : Controller
+    public class BoxerController : ApiController
     {
         private readonly IBoxerService m_BoxerService;
 
@@ -14,24 +18,23 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpGet]
-        public ActionResult Get()
+        public async Task<IList<BoxerDto>> Get()
         {
-            ViewBag.Boxers = m_BoxerService.GetBoxers().Result;
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
+            return await m_BoxerService.GetBoxers();
         }
 
         [HttpPost]
-        public ActionResult Create(BoxerDto boxer)
+        public async Task<HttpResponseMessage> Post(BoxerDto boxer)
         {
-            m_BoxerService.CreateBoxer(boxer);
-            ViewBag.Boxers = m_BoxerService.GetBoxers().Result;
-            return View("Get");
+            await m_BoxerService.CreateBoxer(boxer);
+            return Request.CreateResponse(HttpStatusCode.Created);
+        }
+
+        [HttpDelete]
+        public async Task<HttpResponseMessage> Delete(int id)
+        {
+            await m_BoxerService.DeleteBoxer(id);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
     }
 }

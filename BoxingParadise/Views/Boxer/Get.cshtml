@@ -18,18 +18,18 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var match in ViewBag.Boxers)
-    {
-        <tr>
-            <td>
-                @match.Id
-            </td>
-            <td>
-                @match.Name
-            </td>
-        </tr>
-    }
+        @foreach (var match in ViewBag.Boxers)
+        {
+            <tr>
+                <td>
+                    @match.Id
+                </td>
+                <td>
+                    @match.Name
+                </td>
+            </tr>
+        }
     </tbody>
 
-    @Html.ActionLink("Create a new boxer", "Create");
+    @*@Html.ActionLink("Create a new boxer", "Get");*@
 </table>

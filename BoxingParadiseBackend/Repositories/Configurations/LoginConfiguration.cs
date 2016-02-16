@@ -8,7 +8,7 @@ namespace BoxingParadiseBackend.Repositories.Configurations
     {
         public LoginConfiguration()
         {
-            ToTable("tBoxer");
+            ToTable("tLogin");
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.ExpiryDate).IsRequired();
             Property(x => x.Key).IsRequired().HasMaxLength(10);

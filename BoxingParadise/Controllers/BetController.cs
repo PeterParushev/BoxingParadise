@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace BoxingParadiseBackend.Controllers
+namespace BoxingParadise.Controllers
 {
     public class BetController : ApiController
     {

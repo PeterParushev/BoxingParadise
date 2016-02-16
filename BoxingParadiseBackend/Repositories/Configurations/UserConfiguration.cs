@@ -1,4 +1,5 @@
 ﻿using BoxingParadiseBackend.Models;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration;
 
 namespace BoxingParadiseBackend.Repositories.Configurations
@@ -8,11 +9,12 @@ namespace BoxingParadiseBackend.Repositories.Configurations
         public UserConfiguration()
         {
             ToTable("tUser");
+            Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.Deleted).IsRequired();
             Property(x => x.FullName).HasMaxLength(50).IsRequired();
             Property(x => x.Password).HasMaxLength(50).IsRequired();
             Property(x => x.Rating);
-            HasKey(x => x.Username);
+            Property(x => x.Username).HasMaxLength(50).IsRequired();
         }
     }
 }
