@@ -49,5 +49,12 @@ namespace BoxingParadise.Controllers
         {
             return await m_MatchService.GetMatches(count.Value, skip.Value, query);
         }
+
+        [HttpPut]
+        public async Task<HttpResponseMessage> Update(MatchDto match, string adminKey)
+        {
+            await m_MatchService.SaveMatch(match, adminKey).ConfigureAwait(false);
+            return Request.CreateResponse(HttpStatusCode.Created);
+        }
     }
 }
