@@ -8,8 +8,8 @@ namespace BoxingParadiseBackend.Services.Interfaces
     {
         Task<IList<BoxerDto>> GetBoxers();
 
-        Task CreateBoxer(BoxerDto boxer);
+        Task CreateBoxer(BoxerDto boxer, string adminKey);
 
-        Task DeleteBoxer(int id);
+        Task DeleteBoxer(int id, string adminKey);
     }
 }

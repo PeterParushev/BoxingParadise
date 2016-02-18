@@ -19,7 +19,6 @@ namespace BoxingParadiseBackend.Repositories
             DatabaseContext context = new DatabaseContext();
             context.Bets.Add(bet);
             await context.SaveChangesAsync().ConfigureAwait(false);
-            //context.Dispose();
         }
 
         public async Task CancelBet(int betId)
@@ -32,7 +31,6 @@ namespace BoxingParadiseBackend.Repositories
             }
 
             await context.SaveChangesAsync().ConfigureAwait(false);
-            //context.Dispose();
         }
 
         public IList<Bet> GetAllBetsByMatchId(int matchId)

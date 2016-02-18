@@ -14,12 +14,15 @@ namespace BoxingParadiseBackend.Services
         private readonly IMatchRepository m_MatchRepository;
         private readonly IMatchMapper m_MatchMapper;
         private readonly IUserService m_UserService;
+        private readonly IAdministratorService m_AdministratorService;
 
-        public MatchService(IMatchRepository matchRepository, IMatchMapper matchMapper, IUserService userService)
+        public MatchService(IMatchRepository matchRepository, IMatchMapper matchMapper, IUserService userService,
+            IAdministratorService administratorService)
         {
             m_MatchRepository = matchRepository;
             m_UserService = userService;
             m_MatchMapper = matchMapper;
+            m_AdministratorService = administratorService;
         }
 
         public async Task<MatchDto> GetMatchById(int id)
@@ -27,34 +30,34 @@ namespace BoxingParadiseBackend.Services
             return m_MatchMapper.MapToDto(await m_MatchRepository.GetById(id).ConfigureAwait(false));
         }
 
-        public async Task SaveMatch(MatchDto matchDto)
+        public async Task SaveMatch(MatchDto matchDto, string adminKey)
         {
             Match match = m_MatchMapper.MapFromDto(matchDto).Result;
             await m_MatchRepository.Persist(match).ConfigureAwait(false);
 
-            //m_UserService.UpdateUserRatings(match);
+            m_UserService.UpdateUserRatings(match);
         }
 
-        public async Task DeleteMatchById(int id)
+        public async Task DeleteMatchById(int id, string adminKey)
         {
-            await m_MatchRepository.DeleteById(id).ConfigureAwait(false);
+            if (await m_AdministratorService.IsProvidedAdministratorKeyValid(adminKey))
+            {
+                await m_MatchRepository.DeleteById(id).ConfigureAwait(false);
+            }
         }
 
-        public async Task<IList<MatchDto>> GetMatches(int? take, int? skip)
+        public async Task Cancel(int matchId, string adminKey)
         {
-            return
-                (await m_MatchRepository.GetMatches(take, skip).ConfigureAwait(false)).Select(
-                    x => m_MatchMapper.MapToDto(x)).ToList();
-        }
-
-        public async Task Cancel(int matchId)
-        {
-            await m_MatchRepository.Cancel(matchId).ConfigureAwait(false);
+            if (await m_AdministratorService.IsProvidedAdministratorKeyValid(adminKey))
+            {
+                await m_MatchRepository.Cancel(matchId).ConfigureAwait(false);
+            }
         }
 
         public async Task<IList<MatchDto>> GetMatches(int? take, int? skip, string query)
         {
-            return (await m_MatchRepository.GetMatches(take, skip, query)).Select(x => m_MatchMapper.MapToDto(x)).ToList();
+            return
+                (await m_MatchRepository.GetMatches(take, skip, query)).Select(x => m_MatchMapper.MapToDto(x)).ToList();
         }
     }
 }

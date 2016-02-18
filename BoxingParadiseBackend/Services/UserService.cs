@@ -14,12 +14,14 @@ namespace BoxingParadiseBackend.Services
         private readonly IUserRepository m_UserRepository;
         private readonly IBetRepository m_BetRepository;
         private readonly IMatchRepository m_MatchRepository;
+        private readonly IAdministratorService m_AdministratorService;
 
-        public UserService(IUserRepository userRepository, IBetRepository betRepository, IMatchRepository matchRepository)
+        public UserService(IUserRepository userRepository, IBetRepository betRepository, IMatchRepository matchRepository, IAdministratorService administratorService)
         {
             m_UserRepository = userRepository;
             m_BetRepository = betRepository;
             m_MatchRepository = matchRepository;
+            m_AdministratorService = administratorService;
         }
 
         public async Task<UserDto> GetUser(int id)
@@ -32,9 +34,12 @@ namespace BoxingParadiseBackend.Services
             await m_UserRepository.PersistUser(Mapper.Map<User>(user)).ConfigureAwait(false);
         }
 
-        public async Task DeleteUser(int userId)
+        public async Task DeleteUser(int userId, string adminKey)
         {
-            await m_UserRepository.DeleteUser(userId).ConfigureAwait(false);
+            if (await m_AdministratorService.IsProvidedAdministratorKeyValid(adminKey))
+            {
+                await m_UserRepository.DeleteUser(userId).ConfigureAwait(false);
+            }
         }
 
         public async Task<IList<UserDto>> GetUser(int take, int skip)

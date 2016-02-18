@@ -12,10 +12,12 @@ namespace BoxingParadiseBackend.Services
     public class VenueService : IVenueService
     {
         private readonly IVenueRepository m_VenueRepository;
+        private readonly IAdministratorService m_AdministratorService;
 
-        public VenueService(IVenueRepository venueRepository)
+        public VenueService(IVenueRepository venueRepository, IAdministratorService administratorService)
         {
             m_VenueRepository = venueRepository;
+            m_AdministratorService = administratorService;
         }
 
         public async Task<IList<VenueDto>> GetVenues()
@@ -25,14 +27,20 @@ namespace BoxingParadiseBackend.Services
                     .ToList();
         }
 
-        public async Task DeleteVenue(int venueId)
+        public async Task DeleteVenue(int venueId, string adminKey)
         {
-            await m_VenueRepository.Delete(venueId).ConfigureAwait(false);
+            if (await m_AdministratorService.IsProvidedAdministratorKeyValid(adminKey))
+            {
+                await m_VenueRepository.Delete(venueId).ConfigureAwait(false);
+            }
         }
 
-        public async Task CreateVenue(VenueDto venueDto)
+        public async Task CreateVenue(VenueDto venueDto, string adminKey)
         {
-            await m_VenueRepository.Persist(Mapper.Map<Venue>(venueDto)).ConfigureAwait(false);
+            if (await m_AdministratorService.IsProvidedAdministratorKeyValid(adminKey))
+            {
+                await m_VenueRepository.Persist(Mapper.Map<Venue>(venueDto)).ConfigureAwait(false);
+            }
         }
     }
 }

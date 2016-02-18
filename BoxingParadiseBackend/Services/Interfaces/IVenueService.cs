@@ -8,8 +8,8 @@ namespace BoxingParadiseBackend.Services.Interfaces
     {
         Task<IList<VenueDto>> GetVenues();
 
-        Task DeleteVenue(int venueId);
+        Task DeleteVenue(int venueId, string adminKey);
 
-        Task CreateVenue(VenueDto venueDto);
+        Task CreateVenue(VenueDto venueDto, string adminKey);
     }
 }

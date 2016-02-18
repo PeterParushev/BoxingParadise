@@ -31,9 +31,9 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> Delete(int userId, string adminCode)
+        public async Task<HttpResponseMessage> Delete(int userId, string adminKey)
         {
-            await m_UserSevice.DeleteUser(userId).ConfigureAwait(false);
+            await m_UserSevice.DeleteUser(userId, adminKey).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 

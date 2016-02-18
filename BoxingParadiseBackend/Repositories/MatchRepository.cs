@@ -51,7 +51,7 @@ namespace BoxingParadiseBackend.Repositories
         {
             return await
                 new DatabaseContext().Matches.Where(x => !x.Canceled && x.WinnerId == null)
-                    .OrderByDescending(x => x.StartDate)
+                    .OrderBy(x => x.StartDate)
                     .Take(take.Value)
                     .Skip(skip.Value)
                     .Include("BoxerOne")
@@ -68,21 +68,30 @@ namespace BoxingParadiseBackend.Repositories
             await context.SaveChangesAsync().ConfigureAwait(false);
         }
 
-        public async Task<IList<Match>> GetMatches(int? take, int? skip, string query)
+        public async Task<IList<Match>> GetMatches(int? take, int? skip, string searchWord)
         {
-            throw new NotImplementedException();
+            DatabaseContext context = new DatabaseContext();
 
-            //return await
-            //    new DatabaseContext().Matches.Where(
-            //        x => !x.Canceled && x.BoxerOneId.Name == query || x.BoxerTwoId.Name == query || x.Venue.Name == query)
-            //        .OrderByDescending(x => x.StartDate)
-            //        .Take(take.Value)
-            //        .Skip(skip.Value)
-            //        .Include("BoxerOne")
-            //        .Include("BoxerTwo")
-            //        .Include("Venue")
-            //        .Include("Winner")
-            //        .ToListAsync().ConfigureAwait(false);
+            IQueryable<Match> query = context.Matches.Where(x => !x.Canceled).OrderBy(x => x.StartDate);
+
+            if (!string.IsNullOrEmpty(searchWord))
+            {
+                Boxer boxer = await context.Boxers.FirstOrDefaultAsync(x => x.Name == searchWord);
+                Venue venue = await context.Venues.FirstOrDefaultAsync(x => x.Name == searchWord);
+
+                if (boxer != null)
+                {
+                    query = venue != null
+                        ? query.Where(x => x.BoxerOneId == boxer.Id || x.BoxerTwoId == boxer.Id || x.VenueId == venue.Id)
+                        : query.Where(x => x.BoxerOneId == boxer.Id || x.BoxerTwoId == boxer.Id);
+                }
+                else if (venue != null)
+                {
+                    query = query.Where(x => x.VenueId == venue.Id);
+                }
+            }
+
+            return await query.ToListAsync().ConfigureAwait(false);
         }
     }
 }

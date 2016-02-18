@@ -16,6 +16,6 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
 
         Task Cancel(int matchId);
 
-        Task<IList<Match>> GetMatches(int? take, int? skip, string query);
+        Task<IList<Match>> GetMatches(int? take, int? skip, string searchWord);
     }
 }

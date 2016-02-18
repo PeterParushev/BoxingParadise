@@ -24,16 +24,16 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> Delete(int venueId)
+        public async Task<HttpResponseMessage> Delete(int venueId, string adminKey)
         {
-            await m_VenueService.DeleteVenue(venueId).ConfigureAwait(false);
+            await m_VenueService.DeleteVenue(venueId, adminKey).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Create(VenueDto venueDto)
+        public async Task<HttpResponseMessage> Create(VenueDto venueDto, string adminKey)
         {
-            await m_VenueService.CreateVenue(venueDto).ConfigureAwait(false);
+            await m_VenueService.CreateVenue(venueDto, adminKey).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.Created);
         }
     }
