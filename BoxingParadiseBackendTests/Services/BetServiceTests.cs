@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BoxingParadiseBackend;
 using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
@@ -22,8 +23,7 @@ namespace BoxingParadiseBackendTests.Services
         [OneTimeSetUp]
         public void TestFixtureSetUp()
         {
-            Mapper.CreateMap<Bet, BetDto>();
-            Mapper.CreateMap<BetDto, Bet>();
+            AutoMapperBootstrapper.Initialise();
         }
 
         [Test]

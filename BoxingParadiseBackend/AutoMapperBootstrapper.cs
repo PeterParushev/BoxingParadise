@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Models;
-using BoxingParadiseBackend.Repositories;
-using System.Linq;
 
 namespace BoxingParadiseBackend
 {
@@ -19,16 +17,8 @@ namespace BoxingParadiseBackend
 
         private static void ConfigureBetMapping()
         {
-            DatabaseContext context = new DatabaseContext();
-            Mapper.CreateMap<Bet, BetDto>().
-                ForMember(x => x.BoxerDto, x => x.MapFrom(y => y.Boxer)).
-                ForMember(x => x.MatchDto, x => x.MapFrom(y => y.Match))
-                .ForMember(x => x.UserDto, x => x.MapFrom(y => y.User));
-            Mapper.CreateMap<BetDto, Bet>().
-                ForMember(x => x.Boxer, x => x.MapFrom(y => context.Boxers.FirstOrDefault(z => z.Id == y.Id))).
-                ForMember(x => x.Match, x => x.MapFrom(y => context.Matches.FirstOrDefault(z => z.Id == y.Id))).
-                ForMember(x => x.User, x => x.MapFrom(y => context.Users.FirstOrDefault(z => z.Id == y.Id)));
-            //context.Dispose();
+            Mapper.CreateMap<Bet, BetDto>();
+            Mapper.CreateMap<BetDto, Bet>();
         }
 
         private static void ConfigureBoxerMapping()
@@ -39,16 +29,8 @@ namespace BoxingParadiseBackend
 
         private static void ConfigureMatchMapping()
         {
-            DatabaseContext context = new DatabaseContext();
-            Mapper.CreateMap<Match, MatchDto>()
-                .ForMember(x => x.BoxerOneDto, x => x.MapFrom(y => y.BoxerOne))
-                .ForMember(x => x.BoxerTwoDto, x => x.MapFrom(y => y.BoxerTwo))
-                .ForMember(x => x.VenueDto, x => x.MapFrom(y => y.Venue));
-            Mapper.CreateMap<MatchDto, Match>()
-                .ForMember(x => x.BoxerOne, x => x.MapFrom(y => y.BoxerOneDto))
-                .ForMember(x => x.BoxerTwo, x => x.MapFrom(y => y.BoxerTwoDto))
-                .ForMember(x => x.Venue, x => x.MapFrom(y => y.VenueDto));
-            //context.Dispose();
+            Mapper.CreateMap<Match, MatchDto>();
+            Mapper.CreateMap<MatchDto, Match>();
         }
 
         private static void ConfigureUserMapping()

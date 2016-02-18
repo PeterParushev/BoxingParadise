@@ -54,11 +54,11 @@ namespace BoxingParadiseBackend.Services
 
             foreach (var betForThisMatch in betsForThisMatch)
             {
-                User user = m_UserRepository.GetById(betForThisMatch.User.Id).Result;
+                User user = m_UserRepository.GetById(betForThisMatch.UserId).Result;
 
                 IList<Bet> betsByUser = m_BetRepository.GetBetsByUserId(user.Id).Result;
 
-                user.Rating = (double)betsByUser.Count(x => x.Boxer.Id == m_MatchRepository.GetById(x.Match.Id).Result.Winner.Id) / betsByUser.Count();
+                user.Rating = (double)betsByUser.Count(x => x.BoxerId == m_MatchRepository.GetById(x.MatchId).Result.WinnerId) / betsByUser.Count();
             }
         }
     }

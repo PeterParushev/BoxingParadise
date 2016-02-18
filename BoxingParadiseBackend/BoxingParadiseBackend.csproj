@@ -114,6 +114,10 @@
     <Compile Include="Repositories\Migrations\201602172229318_somethingToDoWithEntityFrameworkThatIDontUnderstandPartTwo.Designer.cs">
       <DependentUpon>201602172229318_somethingToDoWithEntityFrameworkThatIDontUnderstandPartTwo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Migrations\201602182013514_iHaveNoIdeaHowEFWorks.cs" />
+    <Compile Include="Repositories\Migrations\201602182013514_iHaveNoIdeaHowEFWorks.Designer.cs">
+      <DependentUpon>201602182013514_iHaveNoIdeaHowEFWorks.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositories\Migrations\Configuration.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Repositories\VenueRepository.cs" />
@@ -162,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Repositories\Migrations\201602172229318_somethingToDoWithEntityFrameworkThatIDontUnderstandPartTwo.resx">
       <DependentUpon>201602172229318_somethingToDoWithEntityFrameworkThatIDontUnderstandPartTwo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Repositories\Migrations\201602182013514_iHaveNoIdeaHowEFWorks.resx">
+      <DependentUpon>201602182013514_iHaveNoIdeaHowEFWorks.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

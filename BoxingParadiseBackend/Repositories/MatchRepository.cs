@@ -1,5 +1,6 @@
 ﻿using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -23,10 +24,11 @@ namespace BoxingParadiseBackend.Repositories
 
         public async Task Persist(Match match)
         {
-            DatabaseContext context = new DatabaseContext();
-            context.Matches.Add(match);
-            await context.SaveChangesAsync().ConfigureAwait(false);
-            //context.Dispose();
+            using (DatabaseContext context = new DatabaseContext())
+            {
+                context.Matches.Add(match);
+                await context.SaveChangesAsync().ConfigureAwait(false);
+            }
         }
 
         public async Task DeleteById(int id)
@@ -48,7 +50,7 @@ namespace BoxingParadiseBackend.Repositories
         public async Task<IList<Match>> GetMatches(int? take, int? skip)
         {
             return await
-                new DatabaseContext().Matches.Where(x => !x.Canceled && x.Winner == null)
+                new DatabaseContext().Matches.Where(x => !x.Canceled && x.WinnerId == null)
                     .OrderByDescending(x => x.StartDate)
                     .Take(take.Value)
                     .Skip(skip.Value)
@@ -62,24 +64,25 @@ namespace BoxingParadiseBackend.Repositories
         public async Task Cancel(int matchId)
         {
             DatabaseContext context = new DatabaseContext();
-            context.Bets.Where(x => x.Match.Id == matchId).ToList().ForEach(x => x.Canceled = true);
+            context.Bets.Where(x => x.MatchId == matchId).ToList().ForEach(x => x.Canceled = true);
             await context.SaveChangesAsync().ConfigureAwait(false);
-            //context.Dispose();
         }
 
         public async Task<IList<Match>> GetMatches(int? take, int? skip, string query)
         {
-            return await
-                new DatabaseContext().Matches.Where(
-                    x => !x.Canceled && x.BoxerOne.Name == query || x.BoxerTwo.Name == query || x.Venue.Name == query)
-                    .OrderByDescending(x => x.StartDate)
-                    .Take(take.Value)
-                    .Skip(skip.Value)
-                    .Include("BoxerOne")
-                    .Include("BoxerTwo")
-                    .Include("Venue")
-                    .Include("Winner")
-                    .ToListAsync().ConfigureAwait(false);
+            throw new NotImplementedException();
+
+            //return await
+            //    new DatabaseContext().Matches.Where(
+            //        x => !x.Canceled && x.BoxerOneId.Name == query || x.BoxerTwoId.Name == query || x.Venue.Name == query)
+            //        .OrderByDescending(x => x.StartDate)
+            //        .Take(take.Value)
+            //        .Skip(skip.Value)
+            //        .Include("BoxerOne")
+            //        .Include("BoxerTwo")
+            //        .Include("Venue")
+            //        .Include("Winner")
+            //        .ToListAsync().ConfigureAwait(false);
         }
     }
 }

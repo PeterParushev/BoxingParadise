@@ -37,7 +37,7 @@ namespace BoxingParadiseBackend.Repositories
 
         public IList<Bet> GetAllBetsByMatchId(int matchId)
         {
-            return new DatabaseContext().Bets.Where(x => !x.Canceled && x.Match.Id == matchId).ToList();
+            return new DatabaseContext().Bets.Where(x => !x.Canceled && x.MatchId == matchId).ToList();
         }
 
         public async Task CancelAllBetsByMatchId(int matchId)

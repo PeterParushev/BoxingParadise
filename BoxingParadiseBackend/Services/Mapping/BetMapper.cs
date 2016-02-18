@@ -24,10 +24,10 @@ namespace BoxingParadiseBackend.Services.Mapping
         {
             return new BetDto
             {
-                BoxerDto = Mapper.Map<BoxerDto>(bet.Boxer),
-                MatchDto = m_MatchMapper.MapToDto(bet.Match),
+                BoxerId = bet.BoxerId,
+                MatchId = bet.MatchId,
                 Id = bet.Id,
-                UserDto = Mapper.Map<UserDto>(bet.User),
+                UserId = bet.UserId,
                 Canceled = bet.Canceled
             };
         }
@@ -36,10 +36,10 @@ namespace BoxingParadiseBackend.Services.Mapping
         {
             return new Bet
            {
-               Boxer = await m_BoxerRepository.GetById(betDto.BoxerDto.Id).ConfigureAwait(false),
-               Match = await m_MatchMapper.MapFromDto(betDto.MatchDto).ConfigureAwait(false),
+               BoxerId = betDto.BoxerId,
+               MatchId = betDto.MatchId,
                Id = betDto.Id,
-               User = m_UserRepository.GetById(betDto.UserDto.Id).Result,
+               UserId = betDto.UserId,
                Canceled = betDto.Canceled
            };
         }
