@@ -4,9 +4,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace BoxingParadiseBackend.Repositories.Configurations
 {
-    public class MatchContext : EntityTypeConfiguration<Match>
+    public class MatchConfiguration : EntityTypeConfiguration<Match>
     {
-        public MatchContext()
+        public MatchConfiguration()
         {
             ToTable("tMatch");
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);

@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace BoxingParadise.Controllers
+namespace BoxingParadiseBackend.Controllers
 {
     public class MatchController : ApiController
     {
@@ -43,17 +43,17 @@ namespace BoxingParadise.Controllers
             return await m_MatchService.GetMatches(count, skip).ConfigureAwait(false);
         }
 
-        [HttpDelete]
-        public async Task<HttpResponseMessage> Cancel([FromUri] int matchId)
+        [HttpPut]
+        public async Task<HttpResponseMessage> Put(int matchId)
         {
             await m_MatchService.Cancel(matchId).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
-        //[HttpGet]
-        //public async Task<IList<MatchDto>> Get(string query, int? count = 10, int? skip = 0)
-        //{
-        //    return await m_MatchService.GetMatches(count.Value, skip.Value, query);
-        //}
+        [HttpGet]
+        public async Task<IList<MatchDto>> Get(string query, int? count = 10, int? skip = 0)
+        {
+            return await m_MatchService.GetMatches(count.Value, skip.Value, query);
+        }
     }
 }

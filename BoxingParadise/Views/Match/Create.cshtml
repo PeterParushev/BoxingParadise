@@ -9,21 +9,21 @@
 @Html.BeginForm()
 <form>
     <fieldset>
-        <label>Boxer one:</label>
-        @Html.DropDownListFor(x => x.FirstBoxerDto, (IEnumerable<SelectListItem>)ViewBag.Boxers)
+        @*<label>Boxer one:</label>
+            @Html.DropDownListFor(x => x.FirstBoxerDto, (IEnumerable<SelectListItem>)ViewBag.Boxers)
 
-        <label>Boxer two:</label>
-        @Html.DropDownListFor(x => x.SecondBoxerDto, (IEnumerable<SelectListItem>)ViewBag.Boxers)
+            <label>Boxer two:</label>
+            @Html.DropDownListFor(x => x.SecondBoxerDto, (IEnumerable<SelectListItem>)ViewBag.Boxers)
 
-        <label>Venue:</label>
-        @Html.DropDownListFor(x => x.VenueDto, (IEnumerable<SelectListItem>)ViewBag.Venues)
+            <label>Venue:</label>
+            @Html.DropDownListFor(x => x.VenueDto, (IEnumerable<SelectListItem>)ViewBag.Venues)
 
-        <label>Description:</label>
-        @Html.TextAreaFor(x => x.Description)
+            <label>Description:</label>
+            @Html.TextAreaFor(x => x.Description)
 
-        <label>Start date:</label>
-        @Html.TextBoxFor(model => model.StartDate, new { type = "time" })
+            <label>Start date:</label>
+            @Html.TextBoxFor(model => model.StartDate, new { type = "time" })
 
-        <input type="submit" />
+            <input type="submit" />*@
     </fieldset>
 </form>

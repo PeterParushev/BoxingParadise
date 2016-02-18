@@ -28,6 +28,7 @@ namespace BoxingParadiseBackend
                 ForMember(x => x.Boxer, x => x.MapFrom(y => context.Boxers.FirstOrDefault(z => z.Id == y.Id))).
                 ForMember(x => x.Match, x => x.MapFrom(y => context.Matches.FirstOrDefault(z => z.Id == y.Id))).
                 ForMember(x => x.User, x => x.MapFrom(y => context.Users.FirstOrDefault(z => z.Id == y.Id)));
+            //context.Dispose();
         }
 
         private static void ConfigureBoxerMapping()
@@ -40,20 +41,22 @@ namespace BoxingParadiseBackend
         {
             DatabaseContext context = new DatabaseContext();
             Mapper.CreateMap<Match, MatchDto>()
-                .ForMember(x => x.FirstBoxerDto, x => x.MapFrom(y => y.BoxerOne))
-                .ForMember(x => x.SecondBoxerDto, x => x.MapFrom(y => y.BoxerTwo))
+                .ForMember(x => x.BoxerOneDto, x => x.MapFrom(y => y.BoxerOne))
+                .ForMember(x => x.BoxerTwoDto, x => x.MapFrom(y => y.BoxerTwo))
                 .ForMember(x => x.VenueDto, x => x.MapFrom(y => y.Venue));
             Mapper.CreateMap<MatchDto, Match>()
-                .ForMember(x => x.BoxerOne, x => x.MapFrom(y => context.Boxers.FirstOrDefault(z => z.Id == y.FirstBoxerDto.Id)))
-                .ForMember(x => x.BoxerTwo, x => x.MapFrom(y => context.Boxers.FirstOrDefault(z => z.Id == y.SecondBoxerDto.Id)))
-                .ForMember(x => x.Venue, x => x.MapFrom(y => context.Venues.FirstOrDefault(z => z.Id == y.VenueDto.Id)));
+                .ForMember(x => x.BoxerOne, x => x.MapFrom(y => y.BoxerOneDto))
+                .ForMember(x => x.BoxerTwo, x => x.MapFrom(y => y.BoxerTwoDto))
+                .ForMember(x => x.Venue, x => x.MapFrom(y => y.VenueDto));
+            //context.Dispose();
         }
 
         private static void ConfigureUserMapping()
         {
-            Mapper.CreateMap<User, UserDto>().
-                ForMember(x => x.Password, x => x.Ignore());
-            Mapper.CreateMap<UserDto, User>();
+            Mapper.CreateMap<User, UserDto>()
+                .ForMember(x => x.Password, x => x.Ignore());
+            Mapper.CreateMap<UserDto, User>()
+                .ForMember(x => x.Rating, x => x.Ignore());
         }
 
         private static void ConfigureVenueMapping()

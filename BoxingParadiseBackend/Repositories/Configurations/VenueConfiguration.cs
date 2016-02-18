@@ -12,6 +12,7 @@ namespace BoxingParadiseBackend.Repositories.Configurations
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasMaxLength(50).IsRequired();
             Property(x => x.Description).HasMaxLength(1000);
+            Property(x => x.Deleted);
         }
     }
 }

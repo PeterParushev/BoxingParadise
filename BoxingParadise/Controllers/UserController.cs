@@ -24,21 +24,21 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(UserDto user)
+        public async Task<HttpResponseMessage> Create(UserDto user)
         {
             await m_UserSevice.CreateUser(user).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [HttpDelete]
-        public async Task<HttpResponseMessage> Delete(int userId)
+        public async Task<HttpResponseMessage> Delete(int userId, string adminCode)
         {
             await m_UserSevice.DeleteUser(userId).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpGet]
-        public async Task<IList<UserDto>> Get(int take, int skip)
+        public async Task<IList<UserDto>> Get(int take = 10, int skip = 0)
         {
             return await m_UserSevice.GetUser(take, skip).ConfigureAwait(false);
         }

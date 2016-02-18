@@ -25,7 +25,7 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(BetDto bet)
+        public async Task<HttpResponseMessage> Create(BetDto bet)
         {
             await m_BetService.CreateBet(bet).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.Created);

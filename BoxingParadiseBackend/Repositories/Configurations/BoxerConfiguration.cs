@@ -11,6 +11,7 @@ namespace BoxingParadiseBackend.Repositories.Configurations
             ToTable("tBoxer");
             Property(x => x.Id).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
             Property(x => x.Name).HasMaxLength(50).IsRequired();
+            Property(x => x.Deleted);
         }
     }
 }

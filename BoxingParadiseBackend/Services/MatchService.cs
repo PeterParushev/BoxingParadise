@@ -1,8 +1,8 @@
-﻿using AutoMapper;
-using BoxingParadiseBackend.DTOs;
+﻿using BoxingParadiseBackend.DTOs;
 using BoxingParadiseBackend.Models;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services.Interfaces;
+using BoxingParadiseBackend.Services.Mapping.Interface;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -12,24 +12,27 @@ namespace BoxingParadiseBackend.Services
     public class MatchService : IMatchService
     {
         private readonly IMatchRepository m_MatchRepository;
+        private readonly IMatchMapper m_MatchMapper;
         private readonly IUserService m_UserService;
 
-        public MatchService(IMatchRepository matchRepository, IUserService userService)
+        public MatchService(IMatchRepository matchRepository, IMatchMapper matchMapper, IUserService userService)
         {
             m_MatchRepository = matchRepository;
             m_UserService = userService;
+            m_MatchMapper = matchMapper;
         }
 
         public async Task<MatchDto> GetMatchById(int id)
         {
-            return Mapper.Map<MatchDto>(await m_MatchRepository.GetById(id));
+            return m_MatchMapper.MapToDto(await m_MatchRepository.GetById(id).ConfigureAwait(false));
         }
 
         public async Task SaveMatch(MatchDto matchDto)
         {
-            Match match = Mapper.Map<Match>(matchDto);
+            Match match = m_MatchMapper.MapFromDto(matchDto).Result;
             await m_MatchRepository.Persist(match).ConfigureAwait(false);
-            m_UserService.UpdateUserRatings(match);
+
+            //m_UserService.UpdateUserRatings(match);
         }
 
         public async Task DeleteMatchById(int id)
@@ -41,7 +44,7 @@ namespace BoxingParadiseBackend.Services
         {
             return
                 (await m_MatchRepository.GetMatches(take, skip).ConfigureAwait(false)).Select(
-                    x => Mapper.Map<MatchDto>(x)).ToList();
+                    x => m_MatchMapper.MapToDto(x)).ToList();
         }
 
         public async Task Cancel(int matchId)
@@ -51,7 +54,7 @@ namespace BoxingParadiseBackend.Services
 
         public async Task<IList<MatchDto>> GetMatches(int? take, int? skip, string query)
         {
-            return (await m_MatchRepository.GetMatches(take, skip, query)).Select(x => Mapper.Map<MatchDto>(x)).ToList();
+            return (await m_MatchRepository.GetMatches(take, skip, query)).Select(x => m_MatchMapper.MapToDto(x)).ToList();
         }
     }
 }

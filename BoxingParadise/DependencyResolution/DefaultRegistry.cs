@@ -15,11 +15,12 @@
 // </copyright>
 // --------------------------------------------------------------------------------------------------------------------
 
-using BoxingParadise.Controllers;
 using BoxingParadiseBackend.Repositories;
 using BoxingParadiseBackend.Repositories.Interfaces;
 using BoxingParadiseBackend.Services;
 using BoxingParadiseBackend.Services.Interfaces;
+using BoxingParadiseBackend.Services.Mapping;
+using BoxingParadiseBackend.Services.Mapping.Interface;
 using StructureMap;
 using System.Reflection;
 
@@ -43,11 +44,13 @@ namespace BoxingParadise.DependencyResolution
             For<ILoginService>().Use<LoginService>();
             For<IAdministratorService>().Use<AdministratorService>();
             For<IMatchRepository>().Use<MatchRepository>();
-            For<IMatchRepository>().Use<MatchRepository>();
+            For<IUserRepository>().Use<UserRepository>();
             For<IBetRepository>().Use<BetRepository>();
             For<IBoxerRepository>().Use<BoxerRepository>();
             For<IVenueRepository>().Use<VenueRepository>();
             For<IAdministratorRepository>().Use<AdministratorRepository>();
+            For<IMatchMapper>().Use<MatchMapper>();
+            For<IBetMapper>().Use<BetMapper>();
         }
     }
 }

@@ -20,7 +20,7 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public async Task<IList<VenueDto>> Get()
         {
-            return await m_VenueService.GetVenues();
+            return await m_VenueService.GetVenues().ConfigureAwait(false);
         }
 
         [HttpDelete]
@@ -31,9 +31,9 @@ namespace BoxingParadise.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(VenueDto venueDto)
+        public async Task<HttpResponseMessage> Create(VenueDto venueDto)
         {
-            await m_VenueService.CreateVenue(venueDto);
+            await m_VenueService.CreateVenue(venueDto).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.Created);
         }
     }

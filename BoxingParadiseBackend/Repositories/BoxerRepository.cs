@@ -19,6 +19,7 @@ namespace BoxingParadiseBackend.Repositories
             DatabaseContext context = new DatabaseContext();
             context.Boxers.Add(boxer);
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
         }
 
         public async Task Delete(int id)
@@ -26,6 +27,12 @@ namespace BoxingParadiseBackend.Repositories
             DatabaseContext context = new DatabaseContext();
             context.Boxers.Remove(context.Boxers.FirstOrDefault(x => x.Id == id));
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
+        }
+
+        public async Task<Boxer> GetById(int id)
+        {
+            return await new DatabaseContext().Boxers.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
         }
     }
 }

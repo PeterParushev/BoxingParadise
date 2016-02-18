@@ -11,5 +11,7 @@ namespace BoxingParadiseBackend.Repositories.Interfaces
         Task Persist(Boxer boxer);
 
         Task Delete(int id);
+
+        Task<Boxer> GetById(int id);
     }
 }

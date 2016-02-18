@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.Infrastructure;
+﻿using BoxingParadiseBackend.Models;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Migrations;
 
 namespace BoxingParadiseBackend.Repositories.Migrations
@@ -14,6 +15,7 @@ namespace BoxingParadiseBackend.Repositories.Migrations
 
         protected override void Seed(DatabaseContext context)
         {
+            context.Administrators.Add(new Administrator { AdminKey = "admin" });
         }
     }
 }

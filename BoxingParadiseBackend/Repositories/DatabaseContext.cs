@@ -25,7 +25,7 @@ namespace BoxingParadiseBackend.Repositories
             modelBuilder.Configurations.Add(new AdministratorConfiguration());
             modelBuilder.Configurations.Add(new BetConfiguration());
             modelBuilder.Configurations.Add(new BoxerConfiguration());
-            modelBuilder.Configurations.Add(new MatchContext());
+            modelBuilder.Configurations.Add(new MatchConfiguration());
             modelBuilder.Configurations.Add(new UserConfiguration());
             modelBuilder.Configurations.Add(new VenueConfiguration());
             modelBuilder.Configurations.Add(new LoginConfiguration());

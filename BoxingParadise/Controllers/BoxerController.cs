@@ -20,20 +20,20 @@ namespace BoxingParadise.Controllers
         [HttpGet]
         public async Task<IList<BoxerDto>> Get()
         {
-            return await m_BoxerService.GetBoxers();
+            return await m_BoxerService.GetBoxers().ConfigureAwait(false);
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> Post(BoxerDto boxer)
+        public async Task<HttpResponseMessage> Create(BoxerDto boxer)
         {
-            await m_BoxerService.CreateBoxer(boxer);
+            await m_BoxerService.CreateBoxer(boxer).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.Created);
         }
 
         [HttpDelete]
         public async Task<HttpResponseMessage> Delete(int id)
         {
-            await m_BoxerService.DeleteBoxer(id);
+            await m_BoxerService.DeleteBoxer(id).ConfigureAwait(false);
             return Request.CreateResponse(HttpStatusCode.NoContent);
         }
     }

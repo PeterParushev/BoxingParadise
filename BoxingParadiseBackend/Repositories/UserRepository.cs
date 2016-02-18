@@ -11,7 +11,7 @@ namespace BoxingParadiseBackend.Repositories
     {
         public async Task<User> GetById(int id)
         {
-            return await new DatabaseContext().Users.FirstOrDefaultAsync(x => x.Id == id);
+            return await new DatabaseContext().Users.FirstOrDefaultAsync(x => x.Id == id && !x.Deleted);
         }
 
         public async Task PersistUser(User user)
@@ -19,13 +19,20 @@ namespace BoxingParadiseBackend.Repositories
             DatabaseContext context = new DatabaseContext();
             context.Users.Add(user);
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
         }
 
         public async Task DeleteUser(int id)
         {
             DatabaseContext context = new DatabaseContext();
-            context.Users.Remove(context.Users.FirstOrDefault(x => x.Id == id));
+            User user = context.Users.FirstOrDefault(x => x.Id == id);
+            if (user != null)
+            {
+                user.Deleted = true;
+            }
+
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
         }
 
         public async Task<IList<User>> GetUsers(int take, int skip)

@@ -15,12 +15,12 @@ namespace BoxingParadiseBackend.Repositories
 
             if (context.Users.Any(x => x.Username == username && x.Password == password && !x.Deleted))
             {
-                await context.Logins.Where(x => x.IsExpired).ForEachAsync(x => x.IsExpired = true);
+                await context.Logins.Where(x => x.IsExpired).ForEachAsync(x => x.IsExpired = true).ConfigureAwait(false);
                 context.Logins.Add(new Login() { ExpiryDate = DateTime.Now + new TimeSpan(1, 0, 0), IsExpired = false });
-                await context.SaveChangesAsync();
+                await context.SaveChangesAsync().ConfigureAwait(false);
             }
 
-            return await context.Logins.FirstOrDefaultAsync(x => x.ExpiryDate < DateTime.Now);
+            return await context.Logins.FirstOrDefaultAsync(x => x.ExpiryDate < DateTime.Now).ConfigureAwait(false);
         }
     }
 }

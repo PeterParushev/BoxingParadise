@@ -18,7 +18,7 @@ namespace BoxingParadiseBackend.Repositories
 
         public async Task<Match> GetById(int id)
         {
-            return await new DatabaseContext().Matches.FirstOrDefaultAsync(x => x.Id == id);
+            return await new DatabaseContext().Matches.FirstOrDefaultAsync(x => x.Id == id).ConfigureAwait(false);
         }
 
         public async Task Persist(Match match)
@@ -26,6 +26,7 @@ namespace BoxingParadiseBackend.Repositories
             DatabaseContext context = new DatabaseContext();
             context.Matches.Add(match);
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
         }
 
         public async Task DeleteById(int id)
@@ -38,9 +39,10 @@ namespace BoxingParadiseBackend.Repositories
                 match.Canceled = true;
             }
 
-            await m_BetRepository.CancelAllBetsByMatchId(id);
+            await m_BetRepository.CancelAllBetsByMatchId(id).ConfigureAwait(false);
 
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
         }
 
         public async Task<IList<Match>> GetMatches(int? take, int? skip)
@@ -62,6 +64,7 @@ namespace BoxingParadiseBackend.Repositories
             DatabaseContext context = new DatabaseContext();
             context.Bets.Where(x => x.Match.Id == matchId).ToList().ForEach(x => x.Canceled = true);
             await context.SaveChangesAsync().ConfigureAwait(false);
+            //context.Dispose();
         }
 
         public async Task<IList<Match>> GetMatches(int? take, int? skip, string query)
